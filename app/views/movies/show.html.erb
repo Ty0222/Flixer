@@ -1,0 +1,25 @@
+<article>
+	<header>
+		<h2><%= @movie.title %></h2>
+	</header>
+	<table>
+		<tr>
+			<th>Rated: </th>
+			<td><%= @movie.rating %></td>
+		</tr>
+		<tr>
+			<th>Release Date: </th>
+			<td><%= @movie.released_on.to_s(:release_date) %> (<%= time_ago_in_words(@movie.released_on) %> ago) (USA)<td>
+		</tr>
+		<tr>
+			<th>Worldwide Gross: </th>
+			<td><%= format_total_gross(@movie) %></td>
+		</tr>
+	</table>
+	<p><%= @movie.description %></p>
+</article>
+
+<%= link_to("All Movies", root_path) %>
+
+
+

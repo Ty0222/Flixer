@@ -3,7 +3,7 @@
 <article>
 <% @movies.each do |movie| %>
 	<header>
-		<h2><%= movie.title %></h2>
+		<h2><%= link_to(movie.title, movie) %></h2>
 	</header>
 	<table>
 		<tr>
@@ -19,7 +19,7 @@
 			<td><%= format_total_gross(movie) %></td>
 		</tr>
 	</table>
-	<p><%= truncate(movie.description, length: 40, separator: " ") %> (<a href="#">continued</a>)</p>
+	<p><%= truncate(movie.description, length: 40, separator: " ") %> (<%= link_to("continued", movie) %>)</p>
 	<br>
 <% end %>
 </article>
