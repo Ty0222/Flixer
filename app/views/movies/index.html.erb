@@ -1,9 +1,25 @@
-<h1>Movies</h1>
-
-<ul>
+<h1><%= pluralize(@movies.size, "Movie") %></h1>
+<br>
+<article>
 <% @movies.each do |movie| %>
-	<li><strong><%= movie.title %></strong>
-		(<%= movie.rating %>): <%= number_to_currency(movie.total_gross) %>
-	</li>
+	<header>
+		<h2><%= movie.title %></h2>
+	</header>
+	<table>
+		<tr>
+			<th>Rated: </th>
+			<td><%= movie.rating %></td>
+		</tr>
+		<tr>
+			<th>Release Date: </th>
+			<td><%= movie.released_on.to_s(:long) %> (<%= time_ago_in_words(movie.released_on) %> ago) (USA)<td>
+		</tr>
+		<tr>
+			<th>Worldwide Gross: </th>
+			<td><%= format_total_gross(movie) %></td>
+		</tr>
+	</table>
+	<p><%= truncate(movie.description, length: 40, separator: " ") %> (<a href="#">continued</a>)</p>
+	<br>
 <% end %>
-</ul>
+</article>
