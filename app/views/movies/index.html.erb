@@ -12,7 +12,7 @@
 		</tr>
 		<tr>
 			<th>Release Date: </th>
-			<td><%= movie.released_on %> (<%= time_ago_in_words(movie.released_on) %> ago) (USA)<td>
+			<td><%= movie.released_on.to_s(:release_date) %> (<%= time_ago_in_words(movie.released_on) %> ago) (USA)<td>
 		</tr>
 		<tr>
 			<th>Worldwide Gross: </th>
