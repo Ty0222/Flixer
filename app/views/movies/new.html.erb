@@ -1,0 +1,28 @@
+<h1>Editing Movie: <%= @movie.title %></h1>
+
+<%= form_for @movie do |f| %>
+
+<p>
+	<%= f.label :title, "Title" %><br/>
+	<%= f.text_field :title %>
+</p>
+<p>
+	<%= f.label :rating %>
+	<%= f.text_field :rating %>
+</p>
+<p>
+	<%= f.label :released_on, "Release Date" %>
+	<%= f.date_select :released_on %>
+</p>
+<p>
+	<%= f.label :total_gross, "Worldwide Gross" %>
+	<%= f.number_field :total_gross %>
+</p>
+<p>
+	<%= f.label :description, "Description" %>
+	<%= f.text_area :description, cols: 40, rows: 10 %>
+</p>
+<p>
+	<%= f.submit "Add Movie", :disable_with => "Adding..." %>
+</p>
+<% end %>
