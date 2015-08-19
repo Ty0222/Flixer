@@ -1,0 +1,42 @@
+<%= form_for @movie do |f| %>
+
+<p>
+	<%= f.label :title, "Title" %><br/>
+	<%= f.text_field :title %>
+</p>
+<p>
+	<%= f.label :rating %>
+	<%= f.text_field :rating %>
+</p>
+<p>
+	<%= f.label :released_on, "Release Date" %>
+	<%= f.date_select :released_on %>
+</p>
+<p>
+	<%= f.label :total_gross, "Worldwide Gross" %>
+	<%= f.number_field :total_gross %>
+</p>
+<p>
+	<%= f.label :description, "Description" %>
+	<%= f.text_area :description, cols: 40, rows: 10 %>
+</p>
+<p>
+	<%= f.label :cast %>
+	<%= f.text_field :cast %>
+</p>
+<p>
+	<%= f.label :director %>
+	<%= f.text_field :director %>
+</p>
+<p>
+	<%= f.label :duration %>
+	<%= f.text_field :duration, size: 10 %>
+</p>
+<p>
+	<%= f.label :image_file_name, "Image File" %>
+	<%= f.text_field :image_file_name %>
+</p>
+	<%= f.submit %> |
+	<%= link_to "cancel", movies_path %>
+
+<% end %>

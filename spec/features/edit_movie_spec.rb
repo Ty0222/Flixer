@@ -22,7 +22,7 @@ describe "Editing A Movie" do
   		visit movie_url(movie)
   		click_link "Edit"
   		fill_in "Rating", with: "PG"
-  		click_button "Update"
+  		click_button "Update Movie"
 
   		expect(current_path).to eq(movie_path(movie))
   		expect(page).to have_content("PG")

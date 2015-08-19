@@ -1,5 +1,6 @@
 <article>
 	<header>
+		<%= image_for(@movie) %>
 		<h2><%= @movie.title %></h2>
 	</header>
 	<table>
@@ -15,10 +16,25 @@
 			<th>Worldwide Gross: </th>
 			<td><%= format_total_gross(@movie) %></td>
 		</tr>
+		<tr>
+			<th>Cast</th>
+			<td><%= @movie.cast %></td>
+		</tr>
+		<tr>
+			<th>Director</th>
+			<tr><%= @movie.director %></tr>
+		</tr>
+		<tr>
+			<th>Duration</th>
+			<tr><%= @movie.duration %></tr>
+		</tr>
 	</table>
-	<p><%= @movie.description %></p>
+	<p>
+		<%= @movie.description %>
+	</p>
 </article>
 
-<%= link_to("Edit", edit_movie_path(@movie)) %>
-
-<%= link_to("All Movies", root_path) %>
+<%= link_to "Edit", edit_movie_path(@movie) %> |
+<%= link_to "All Movies", root_path %> |
+<%= link_to "Delete", movie_path(@movie), method: :delete,
+		data: {confirm: "Are you sure?"} %>

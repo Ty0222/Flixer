@@ -2,7 +2,7 @@
 describe "Viewing an individual movie" do
   it "shows the movie details" do
 
-  	movie = Movie.create(movie_attributes(total_gross: 623933331.00))
+  	movie = Movie.create(movie_attributes)
   
   	visit movie_url(movie)
 
@@ -10,6 +10,10 @@ describe "Viewing an individual movie" do
   	expect(page).to have_content(movie.rating)
   	expect(page).to have_content(movie.description)
   	expect(page).to have_content("May 7th, 2010")
+    expect(page).to have_content(movie.cast)
+    expect(page).to have_content(movie.director)
+    expect(page).to have_content(movie.duration)
+    expect(page).to have_selector("img[src$='#{movie.image_file_name}']")
   end
 
   it "shows the total gross if total gross exceeds 50M" do

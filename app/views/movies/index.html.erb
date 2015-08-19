@@ -4,6 +4,7 @@
 <article>
 <% @movies.each do |movie| %>
 	<header>
+		<%= image_for(movie) %>
 		<h2><%= link_to(movie.title, movie) %></h2>
 	</header>
 	<table>
@@ -18,6 +19,17 @@
 		<tr>
 			<th>Worldwide Gross: </th>
 			<td><%= format_total_gross(movie) %></td>
+		</tr>
+		<th>Cast</th>
+			<td><%= movie.cast %></td>
+		</tr>
+		<tr>
+			<th>Director</th>
+			<tr><%= movie.director %></tr>
+		</tr>
+		<tr>
+			<th>Duration</th>
+			<tr><%= movie.duration %></tr>
 		</tr>
 	</table>
 	<p><%= truncate(movie.description, length: 43, separator: " ") %> (<%= link_to("continued", movie) %>)</p>
