@@ -1,12 +1,10 @@
-<h1><%= pluralize(@movies.size, "Movie") %></h1>
 <br>
-<%= link_to "Add New Movie", new_movie_path %>
-<article>
-<% @movies.each do |movie| %>
+<article class="movie">
+<% @movies.each do |movie| %> 
 	<header>
 		<%= image_for(movie) %>
-		<h2><%= link_to(movie.title, movie) %></h2>
-	</header>
+	<h2><%= link_to(movie.title, movie) %></h2>
+</header>
 	<table>
 		<tr>
 			<th>Rated: </th>
@@ -32,7 +30,8 @@
 			<tr><%= movie.duration %></tr>
 		</tr>
 	</table>
-	<p><%= truncate(movie.description, length: 43, separator: " ") %> (<%= link_to("continued", movie) %>)</p>
-	<br>
+	<p>
+	<%= truncate(movie.description, length: 43, separator: " ") %> (<%= link_to("continued", movie) %>)
+	</p>
 <% end %>
 </article>

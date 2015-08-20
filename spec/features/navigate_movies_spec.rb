@@ -1,19 +1,17 @@
 
 describe "Navigating Movies" do
 
-  context "when user clicks 'All Movies' link" do
-    it "allows navigation between detail page to listing page" do
-    	movie = Movie.create(movie_attributes)	
+  it "allows navigation between detail and listing page when user clicks 'All Movies' link" do
+  	movie = Movie.create(movie_attributes)	
 
-      visit movie_url(movie)	
-      click_on "All Movies"
+    visit movie_url(movie)	
+    click_link "All Movies"
 
-      expect(current_path).to eq(root_path)
-    end
+    expect(current_path).to eq(movies_path)
   end
 
-  context "when user clicks a movie's title (link)" do
-    it "allows navigation between listing page to detail page" do
+  context "" do
+    it "allows navigation between listing and detail page when user clicks movie's title" do
       movie = Movie.create(movie_attributes)
 
       visit movies_url
@@ -23,8 +21,8 @@ describe "Navigating Movies" do
     end
   end
 
-  context "when user clicks 'continue' link in description" do
-    it "allows navigation between listing page to detail page" do
+  context "" do
+    it "allows navigation between listing and detail page when user clicks 'continue'" do
     	movie = Movie.create(movie_attributes)
 
     	visit movies_url

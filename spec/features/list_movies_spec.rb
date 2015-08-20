@@ -24,7 +24,6 @@ describe "Listing Of Movies" do
 
   	visit movies_url
 
-  	expect(page).to have_content("3 Movies")
   	expect(page).to have_content(movie1.title)
   	expect(page).to have_content(movie2.title)
   	expect(page).to have_content(movie3.title)
