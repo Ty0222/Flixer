@@ -2,11 +2,11 @@
 
 <p>
 	<%= f.label :title, "Title" %><br/>
-	<%= f.text_field :title %>
+	<%= f.text_field :title, autofocus: true %>
 </p>
 <p>
 	<%= f.label :rating %>
-	<%= f.text_field :rating %>
+	<%= f.select :rating, Movie::RATINGS, prompt: "Pick one" %>
 </p>
 <p>
 	<%= f.label :released_on, "Release Date" %>
