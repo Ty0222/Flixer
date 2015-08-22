@@ -1,6 +1,6 @@
 describe "Creating A New Movie" do
 	
-	it "shows new movie form and redirects to movie url when user submits new details" do
+	it "shows new movie form and redirects to movie url with message of success" do
 		visit movies_url
 		
 		click_link "Add New Movie"		
@@ -20,10 +20,20 @@ describe "Creating A New Movie" do
 		fill_in "Duration", with: "123 min"
 		fill_in "Image File", with: "deadpool.png"
 
-		click_button "Create Movie"
+		click_on "Create Movie"
 
 		expect(current_path).to eq(movie_path(Movie.last))
-
+		expect(page).to have_content("Movie successfully created!")
 		expect(page).to have_content("Deadpool")
 	end
+
+	it "returns error message(s) when required data is not filled in" do
+    movie = Movie.new(movie_attributes(title: ""))
+
+    visit new_movie_url
+
+    click_on "Create Movie"
+
+    expect(page).to have_content("Title can't be blank")
+  end
 end
