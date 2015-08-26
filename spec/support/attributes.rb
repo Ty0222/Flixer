@@ -12,3 +12,13 @@ def movie_attributes(overrides = {})
  	  image_file_name: "iron_man_2.png"
 	}.merge(overrides)
 end
+
+def review_attributes(overrides = {})
+	{
+		name: "Robert Ebert",
+		stars: 3,
+		comment: "I laughed, I cried, I spilled my popcorn!",
+		location: "Middletown, New Jersey"
+	}.merge(overrides)
+
+end

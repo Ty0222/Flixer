@@ -50,7 +50,7 @@ end
 
 #app/models/movie.rb
 
-describe "Movie attributes" do
+describe "A Movie" do
   
   it "requires a title" do
     movie = Movie.new(movie_attributes(title: ""))
@@ -169,4 +169,25 @@ describe "Movie attributes" do
 
     expect(movie.valid?).to eq(true)
   end  
+
+  it "has many reviews" do
+    movie = Movie.new(movie_attributes)
+    
+   review1 = movie.reviews.new(review_attributes)
+   review2 = movie.reviews.new(review_attributes(name: "Ty Kelly"))
+
+    expect(movie.reviews).to include(review1)
+    expect(movie.reviews).to include(review2)
+  end
+
+  it "deletes all of movie's associated reviews" do
+    movie = Movie.create(movie_attributes)
+
+    movie.reviews.create(review_attributes)
+    movie.reviews.create(review_attributes(name: "Ty Kelly"))
+
+    expect {
+      movie.destroy
+      }.to change(Review, :count).by(-2) 
+  end
 end
