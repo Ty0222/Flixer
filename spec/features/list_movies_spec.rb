@@ -1,4 +1,4 @@
-#app/views/index.html.erb
+#app/views/movies/index.html.erb
 
 describe "Listing Of Movies" do
 	

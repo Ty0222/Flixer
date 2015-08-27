@@ -1,0 +1,19 @@
+<header>
+	<h1>Reviews for <%= link_to @movie.title, movie_path(@movie) %>
+	</h1>
+</header>
+
+<ol>
+	<% @reviews.each do |review| %>
+	<li>
+		<h2><%= review.name %> -
+		 <%= review.location %>
+		</h2>
+		<br>
+		<h3><%= pluralize(review.stars, "Stars") %><h3>
+		<p>
+			<%= review.comment %>
+		</p>
+	</li>
+	<% end %>
+</ol>

@@ -34,6 +34,10 @@
 	<p>
 		<%= @movie.description %>
 	</p>
+	<p>
+		<%= link_to "Reviews", movie_reviews_path(@movie) %>
+		<%= link_to "Write Review", new_movie_review_path(@movie) %>
+	</p>
 </article>
 <p class="movie">
 <%= link_to "Edit", edit_movie_path(@movie) %> |
