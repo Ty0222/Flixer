@@ -14,4 +14,20 @@ module MoviesHelper
 			image_tag(movie.image_file_name)
 		end
 	end
+
+	def format_average_stars(movie)
+		if movie.average_stars.nil?
+			content_tag(:strong, "No reviews")
+		else
+			"*" * movie.average_stars.round
+		end 
+	end
+
+	def classic(movie)
+		if movie.classic?
+			content_tag(:strong, "Classic!")
+		else
+			nil
+		end
+	end
 end

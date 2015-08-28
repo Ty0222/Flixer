@@ -4,7 +4,16 @@ describe "#flop?" do
   
 	it "is a flop when movie total gross is less than 50M" do
 	  movie = Movie.new(total_gross: 40000000.0)
-
+    movie.reviews.new(review_attributes(stars: 3))
+    movie.reviews.new(review_attributes(stars: 3))
+    movie.reviews.new(review_attributes(stars: 3))
+    movie.reviews.new(review_attributes(stars: 3))
+    movie.reviews.new(review_attributes(stars: 3))
+    movie.reviews.new(review_attributes(stars: 2))
+    movie.reviews.new(review_attributes(stars: 2))
+    movie.reviews.new(review_attributes(stars: 2))
+    movie.reviews.new(review_attributes(stars: 2))
+    
     expect(movie.flop?).to eq(true)
 	end
 
@@ -189,5 +198,14 @@ describe "A Movie" do
     expect {
       movie.destroy
       }.to change(Review, :count).by(-2) 
+  end
+
+  it "calculates the average number of stars" do
+    movie = Movie.create(movie_attributes)
+
+    movie.reviews.create(review_attributes(stars: 1))
+    movie.reviews.create(review_attributes(stars: 3))
+
+    expect(movie.average_stars).to eq(2)
   end
 end

@@ -12,10 +12,22 @@ class Movie < ActiveRecord::Base
 	validates :rating, inclusion: { in: RATINGS }
 	
 	def flop?
-		total_gross.blank? || total_gross < 50000000.0
+		if total_gross.blank? || total_gross < 50000000.0 && reviews.size < 51 && reviews.average(:stars).to_i.round < 4
+			true
+		else
+			false
+		end
+	end
+
+	def average_stars
+		reviews.average(:stars)
 	end
 
 	def self.released_movies
 		where("released_on <= ?", Time.now).order(released_on: :desc)
+	end
+
+	def classic?
+		reviews.size > 50 && reviews.average(:stars).to_i.round >= 4		
 	end
 end

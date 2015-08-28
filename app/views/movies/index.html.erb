@@ -23,11 +23,18 @@
 		</tr>
 		<tr>
 			<th>Director</th>
-			<tr><%= movie.director %></tr>
+			<td><%= movie.director %></td>
 		</tr>
 		<tr>
 			<th>Duration</th>
-			<tr><%= movie.duration %></tr>
+			<td><%= movie.duration %></td>
+		</tr>
+		<tr>
+			<th>Average Star Rating</th>
+			<td>
+				<%= format_average_stars(movie) %>
+				<%= classic(movie) %>
+			</td>
 		</tr>
 	</table>
 	<p>

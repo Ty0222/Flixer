@@ -1,8 +1,9 @@
+#app/views/movies/show.html.erb
 
 describe "Viewing an individual movie" do
+  
   it "shows the movie details" do
-
-  	movie = Movie.create(movie_attributes)
+    movie = Movie.create(movie_attributes)
   
   	visit movie_url(movie)
 
@@ -30,5 +31,26 @@ describe "Viewing an individual movie" do
   	visit movie_url(movie)
 
   	expect(page).to have_content("Flop!")
+  end
+
+  it "shows 'No reviews' when none exist for a movie" do
+    movie = Movie.create(movie_attributes)
+
+    visit movie_url(movie)
+
+    expect(page).to have_content("No reviews")
+    expect(page).to_not have_content("**")
+    expect(page).to_not have_content("0 stars")
+  end
+
+  it "shows average number of stars for a movie" do
+    movie = Movie.create(movie_attributes)
+    movie.reviews.create(review_attributes(stars: 1))
+    movie.reviews.create(review_attributes(stars: 3))
+
+    visit movie_url(movie)
+
+    expect(page).to have_content("**")
+    expect(page).to_not have_content("No reviews")
   end
 end
