@@ -9,7 +9,7 @@ describe "Listing Of Movies" do
             						  description: "Six months after the events of Iron Man, Tony Stark is resisting calls by the United States government to hand over the Iron Man technology while also combating his declining health from the arc reactor in his chest. Meanwhile, rogue Russian scientist Ivan Vanko has developed the same technology in order to pursue a vendetta against the Stark family, in the process joining forces with Stark's business rival, Justin Hammer.",
             						  released_on: "2008-05-02",
                           duration: "123 min",
-                          image: open.("#{Rails.root}/app/assets/images/ironman.png"))
+                          image: open("#{Rails.root}/app/assets/images/ironman2.jpg"))
 
 	 movie2 = Movie.create(title: "Superman",
         						     rating: "PG",

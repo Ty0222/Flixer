@@ -8,7 +8,7 @@ describe "Creating A New Movie" do
 		expect(current_path).to eq(new_movie_path)
 		expect(find_field("Title").value).to eq(nil)
 
-		fill_in "Title", with: "Deadpool"
+		fill_in "Title", with: "The Amazing Spider-Man"
 		select "R", from: "movie_rating"
 		fill_in "Worldwide Gross", with: "100000000"
 		fill_in "Description", with: "A 'bad ass' movie bound to give you many laughs"
@@ -18,13 +18,13 @@ describe "Creating A New Movie" do
 		fill_in "Cast", with: "Ryan Reynolds"
 		fill_in "Director", with: "Tim Miller"
 		fill_in "Duration", with: "123 min"
-		attach_file "Image", with: "#{Rails.root}/app/assets/images/ironman.png"
+		attach_file "Image", "#{Rails.root}/app/assets/images/spiderman.jpg"
 
 		click_on "Create Movie"
 
 		expect(current_path).to eq(movie_path(Movie.last))
 		expect(page).to have_content("Movie successfully created!")
-		expect(page).to have_content("Deadpool")
+		expect(page).to have_content("The Amazing Spider-Man")
 	end
 
 	it "returns error message(s) when required data is not filled in" do
