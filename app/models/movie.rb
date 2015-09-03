@@ -1,6 +1,8 @@
 class Movie < ActiveRecord::Base
 	has_many :reviews, dependent: :destroy
-	has_attached_file :image
+	has_attached_file :image, styles: {
+		default: "214x320>"
+	}
 
 	validates :title, :released_on, :duration, presence: true
 	validates :description, length: { minimum: 25 }
