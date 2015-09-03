@@ -22,3 +22,12 @@ def review_attributes(overrides = {})
 	}.merge(overrides)
 
 end
+
+def user_attributes(overrides = {})
+	{
+		name: "Ty Kelly",
+		email: "kellytyquan@example.com",
+		password: "secret",
+		password_confirmation: "secret"
+	}.merge(overrides)
+end
