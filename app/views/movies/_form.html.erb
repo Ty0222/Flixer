@@ -1,4 +1,4 @@
-<%= form_for @movie do |f| %>
+<%= form_for(@movie) do |f| %>
 <%= render "shared/errors", object: @movie %>
 <p>
 	<%= f.label :title, "Title" %><br/>
@@ -33,8 +33,11 @@
 	<%= f.text_field :duration, size: 10 %>
 </p>
 <p>
-	<%= f.label :image_file_name, "Image File" %>
-	<%= f.text_field :image_file_name %>
+	<%= f.label :image, "Image" %>
+	<%= f.file_field :image %>
+</p>
+<p>
+	<%= image_for(@movie) %>
 </p>
 	<%= f.submit %> |
 	<%= link_to "cancel", movies_path %>

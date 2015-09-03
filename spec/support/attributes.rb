@@ -9,7 +9,7 @@ def movie_attributes(overrides = {})
  	  cast: "Ryan Reynolds",
  	  director: "Tim Miller",
  	  duration: "123 min",
- 	  image_file_name: "iron_man_2.png"
+ 	  image: open("#{Rails.root}/app/assets/images/iron_man_2.png")
 	}.merge(overrides)
 end
 

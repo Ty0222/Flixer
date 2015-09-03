@@ -9,7 +9,7 @@ describe "Listing Of Movies" do
             						  description: "Six months after the events of Iron Man, Tony Stark is resisting calls by the United States government to hand over the Iron Man technology while also combating his declining health from the arc reactor in his chest. Meanwhile, rogue Russian scientist Ivan Vanko has developed the same technology in order to pursue a vendetta against the Stark family, in the process joining forces with Stark's business rival, Justin Hammer.",
             						  released_on: "2008-05-02",
                           duration: "123 min",
-                          image_file_name: "iron_man.png")
+                          image: open.("#{Rails.root}/app/assets/images/ironman.png"))
 
 	 movie2 = Movie.create(title: "Superman",
         						     rating: "PG",
@@ -36,7 +36,7 @@ describe "Listing Of Movies" do
   	expect(page).to have_content("$623,933,331.00")
   	expect(page).to have_content(movie1.description[0..40])
   	expect(page).to have_content("May 2nd, 2008")
-    expect(page).to have_selector("img[src$='iron_man.png']")
+    expect(page).to have_selector("img[src$='#{movie1.image.url}']")
   end
 
 	it "lists only movies already released to public (USA)" do

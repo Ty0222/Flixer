@@ -124,30 +124,6 @@ describe "A Movie" do
 
     expect(movie.errors[:total_gross].any?).to eq(true)
   end
-
-  it "accepts any properly formatted image file names" do
-    file_names = %w[m.gif movie.gif MOVIE.PNG rf.jpg]
-
-    file_names.each do |file_name|
-      movie = Movie.new(movie_attributes(image_file_name: file_name))
-
-      movie.valid?
-
-      expect(movie.errors[:image_file_name].any?).to eq(false)
-    end
-  end
-
-  it "rejects any improperly formatted image file names" do
-    file_names = %w[.gif movie.jpeg movie.pdf rf.doc]
-
-    file_names.each do |file_name|
-      movie = Movie.new(movie_attributes(image_file_name: file_name))
-        
-      movie.valid?
-
-      expect(movie.errors[:image_file_name].any?).to eq(true)
-    end
-  end
   
   it "accepts any ratings on the approved list" do
     ratings = %w[G PG PG-13 R NC-17]

@@ -18,7 +18,7 @@ describe "Creating A New Movie" do
 		fill_in "Cast", with: "Ryan Reynolds"
 		fill_in "Director", with: "Tim Miller"
 		fill_in "Duration", with: "123 min"
-		fill_in "Image File", with: "deadpool.png"
+		attach_file "Image", with: "#{Rails.root}/app/assets/images/ironman.png"
 
 		click_on "Create Movie"
 

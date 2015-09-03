@@ -18,6 +18,7 @@ class ReviewsController < ApplicationController
 			render :new
 		end
 	end
+
 private
 
 	def set_movie
