@@ -23,8 +23,8 @@ describe "Creating A User" do
 		expect(page).to have_content("Account Settings")
 		expect(page).to have_content("jeanbilly@example.com")
 		expect(page).to have_content("Thanks for signing up!")
-		expect(page).to have_link("Sign Out")
-		expect(page).not_to have_link("Sign In")
+		expect(page).to have_link("Log Out")
+		expect(page).not_to have_link("Log In")
 		expect(page).not_to have_link("Sign Up")
 	end
 

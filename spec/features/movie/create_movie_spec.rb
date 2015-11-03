@@ -1,8 +1,10 @@
-#app/views/movies/new.html.erb & app/views/movies/show.html.erb
-
 describe "Creating A New Movie" do
+
+	before { @user = User.create(user_attributes) }
 	
 	it "saves a new user with message of success" do
+		login(@user)
+
 		visit movies_url
 		
 		click_link "Add New Movie"		
@@ -31,6 +33,8 @@ describe "Creating A New Movie" do
 
 	it "does not save user and returns error message(s) when invalid" do
     movie = Movie.new(movie_attributes(title: ""))
+
+    login(@user)
 
     visit new_movie_url
 

@@ -1,8 +1,11 @@
 describe "Editing A Movie" do
 
+	before { @user = User.create(user_attributes) }
+
 	it "updates the movie and shows a movie's updated details with message of success" do
 	  movie = Movie.create(movie_attributes)
 
+	  login(@user)
 	  visit movie_url(movie)
 	  click_link "Edit"
 
@@ -22,6 +25,7 @@ describe "Editing A Movie" do
   it "does not update movie and returns error message(s) when invalid" do
     movie = Movie.create(movie_attributes)
 
+    login(@user)
     visit edit_movie_url(movie)
     fill_in "Title", with: ""
     click_on "Update Movie"

@@ -1,10 +1,11 @@
-#app/views/reviews/new.html.erb & app/views/movies/show.html.erb
-
 describe "Creating Review For A Movie" do
+	
+	before { @user = User.create(user_attributes) }
 	
 	it "saves the review" do
 		movie = Movie.create(movie_attributes)
 
+		login(@user)
 		visit movie_url(movie)
 		click_link "Write Review"
 
@@ -22,6 +23,7 @@ describe "Creating Review For A Movie" do
 	it "does not save review and returns error messages when invalid" do
 		movie = Movie.create(movie_attributes)
 
+		login(@user)
 		visit new_movie_review_url(movie)
 
 		expect {

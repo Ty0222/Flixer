@@ -1,5 +1,3 @@
-#app/views/reviews/index.html.erb
-
 describe "Viewing Reviews" do
 	
 	it "lists a specific movie's reviews and reviewer info" do
@@ -9,7 +7,7 @@ describe "Viewing Reviews" do
 
 		movie2 = Movie.create(movie_attributes(title: "Deadpool"))
 		review3 = movie2.reviews.create(review_attributes(name: "Mike Myers"))
-		
+
 		visit movie_url(movie1)
 		click_link "Reviews"
 		

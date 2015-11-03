@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+	skip_before_action :require_login, only: [:new, :create]
+
 
 	def new
 	end
@@ -16,6 +18,6 @@ class SessionsController < ApplicationController
 
 	def destroy
 		session[:user_id] = nil
-		redirect_to root_url, notice: "You have successfully signed out!"
+		redirect_to root_url, notice: "You have successfully logged out!"
 	end
 end

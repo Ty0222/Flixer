@@ -1,5 +1,3 @@
-#app/views/movies/show.html.erb
-
 describe "Viewing an individual movie" do
   
   it "shows a movie's details" do
@@ -20,7 +18,7 @@ describe "Viewing an individual movie" do
   it "shows the total gross if total gross exceeds 50M" do
   	movie = Movie.create(movie_attributes(total_gross: 623933331.00))
 
-  	visit movie_url(movie)
+    visit movie_url(movie)
 
   	expect(page).to have_content("$623,933,331.00")
   end
@@ -28,7 +26,7 @@ describe "Viewing an individual movie" do
   it "shows 'Flop' if total gross is less than 50M" do
   	movie = Movie.create(movie_attributes(total_gross: 23933331.00))	
   
-  	visit movie_url(movie)
+    visit movie_url(movie)
 
   	expect(page).to have_content("Flop!")
   end

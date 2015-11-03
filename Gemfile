@@ -49,7 +49,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 group :test, :development do
   gem "minitest"
-  gem "rspec-rails", "2.13.1"
+  gem "rspec-rails", "2.14.0"
 end
 
 group :test do

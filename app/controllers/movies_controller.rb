@@ -1,4 +1,6 @@
 class MoviesController < ApplicationController
+	skip_before_action :require_login, only: [:show, :index]
+
 
 	def index
 		@movies = Movie.released_movies

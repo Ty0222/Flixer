@@ -1,5 +1,3 @@
-#app/views/movies/index.html.erb
-
 describe "Listing Of Movies" do
 	
   it "shows all of the movies" do
@@ -41,7 +39,7 @@ describe "Listing Of Movies" do
 
 	it "lists only movies already released to public (USA)" do
 		movie = Movie.create(movie_attributes(released_on: Date.today+1))
-	
+	 
 		visit movies_url
 
 		expect(page).to_not have_content("August 19th, 2015")

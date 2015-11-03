@@ -5,14 +5,14 @@ describe "Signing Out" do
 	it "signs user out of session and redirects to root url" do
 		user = User.create!(user_attributes)
 
-		sign_in(user)
+		login(user)
 
-		click_link "Sign Out"
+		click_link "Log Out"
 
 		expect(current_path).to eq(root_path)
-		expect(page).not_to have_link("Sign Out")
+		expect(page).not_to have_link("Log Out")
 		expect(page).to have_link("Sign Up")
-		expect(page).to have_link("Sign In")
-		expect(page).to have_content("signed out")
+		expect(page).to have_link("Log In")
+		expect(page).to have_content("logged out")
 	end
 end
