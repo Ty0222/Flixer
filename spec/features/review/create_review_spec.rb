@@ -19,7 +19,7 @@ describe "Creating Review For A Movie" do
 		expect(page).to have_content("Thanks for your review!")
 	end
 
-	it "does not save review when invalid" do
+	it "does not save review and returns error messages when invalid" do
 		movie = Movie.create(movie_attributes)
 
 		visit new_movie_review_url(movie)

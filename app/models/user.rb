@@ -1,8 +1,23 @@
 class User < ActiveRecord::Base
-  #creates password validations by default
   has_secure_password
 
   validates :name, presence: true
+  validates :username, presence: true, format: /\A[A-Z0-9]+\z/i,
+  					uniqueness: { case_sensitive: false }
   validates :email, presence: true, format: /\A\S+@\S+\z/,
   					uniqueness: { case_sensitive: false }
+
+  def gravatar_id
+  	Digest::MD5::hexdigest(email.downcase)
+  end
+
+  def self.authenticate(email_or_username, password)
+    user = find_by(email: email_or_username) || find_by(username: email_or_username)
+    user && user.authenticate(password)
+  end
+
+  def first_name
+    full_name = name.split(" ")
+    full_name[0]
+  end
 end

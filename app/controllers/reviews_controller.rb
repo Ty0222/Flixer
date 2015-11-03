@@ -10,7 +10,7 @@ class ReviewsController < ApplicationController
 	end
 
 	def create
-		@review = @movie.reviews.new(review_attributes)
+		@review = @movie.reviews.new(review_params)
 
 		if @review.save
 			redirect_to movie_reviews_url(@movie), notice: "Thanks for your review!"
@@ -25,7 +25,7 @@ private
 		@movie = Movie.find(params[:movie_id])
 	end
 
-	def review_attributes
+	def review_params
 		params.require(:review).permit(:name, :stars, :comment, :location)
 	end
 end

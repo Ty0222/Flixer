@@ -2,7 +2,7 @@
 
 describe "Viewing an individual movie" do
   
-  it "shows the movie details" do
+  it "shows a movie's details" do
     movie = Movie.create(movie_attributes)
   
   	visit movie_url(movie)

@@ -1,0 +1,32 @@
+<%= form_for(@user) do |f| %>
+<%= render "shared/errors", object: @user %>
+<p>
+  <%= f.label :name, "Full Name" %><br>
+  <%= f.text_field :name, size: 40, autofocus: true %>
+</p>
+<p>
+	<%= f.label :username, "Username" %><br>
+	<%= f.text_field :username, size: 40,
+	 								 placeholder: "Alphanumeric characters only!"%>
+</p>
+<p>
+	<%= f.label :email, "Email" %><br>
+	<%= f.email_field :email, size: 40 %>
+</p>
+<p>
+	<%= f.label :password, "Password" %><br>
+	<%= f.password_field :password, size: 40 %>
+</p>
+<p>
+	<%= f.label :password_confirmation, "Confirm Password" %><br>
+	<%= f.password_field :password_confirmation, size: 40 %>
+</p>
+<p>
+	<% if @user.new_record? %>
+		<%= f.submit "Create Account", :disable_with => "Creating..." %>
+	<% else %>
+		<%= f.submit "Update Account", :disable_with => "Updating..." %>
+	<% end %>
+	<%= link_to "Cancel", movies_path %>
+</p>
+<% end %>

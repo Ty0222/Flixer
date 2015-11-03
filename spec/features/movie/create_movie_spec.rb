@@ -1,6 +1,8 @@
+#app/views/movies/new.html.erb & app/views/movies/show.html.erb
+
 describe "Creating A New Movie" do
 	
-	it "shows new movie form and redirects to movie url with message of success" do
+	it "saves a new user with message of success" do
 		visit movies_url
 		
 		click_link "Add New Movie"		
@@ -27,7 +29,7 @@ describe "Creating A New Movie" do
 		expect(page).to have_content("The Amazing Spider-Man")
 	end
 
-	it "returns error message(s) when required data is not filled in" do
+	it "does not save user and returns error message(s) when invalid" do
     movie = Movie.new(movie_attributes(title: ""))
 
     visit new_movie_url

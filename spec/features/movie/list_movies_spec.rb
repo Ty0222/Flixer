@@ -2,7 +2,7 @@
 
 describe "Listing Of Movies" do
 	
-  it "shows all movies in database when user visits home page" do
+  it "shows all of the movies" do
     movie1 = Movie.create(title: "Iron Man 2",
   						            rating: "PG-13",
             						  total_gross: 623933331.0,

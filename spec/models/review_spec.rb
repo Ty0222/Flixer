@@ -9,7 +9,7 @@ describe "A Review" do
 		expect(review.movie).to eq(movie)
 	end
 
-	it "with example attributes is valid" do
+	it "accepts valid entry of data" do
 		review = Review.new(review_attributes)
 
 		expect(review.valid?).to eq(true)
@@ -38,7 +38,7 @@ describe "A Review" do
 	end
 
 	it "rejects unapproved star ratings" do
-		stars = %w[0 -1 -2 6 22]
+		stars = [0, -1, -2, 6, 22]
 
 		stars.each do |star|
 			review = Review.new(stars: star)

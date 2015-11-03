@@ -1,6 +1,6 @@
 describe "Deleting A Movie" do
 	
-	it "removes that movie from and redirects to listing page with message of success" do
+	it "removes a movie with message of success and redirects to home page" do
 		movie = Movie.create(movie_attributes)
 
 		visit movie_url(movie)
