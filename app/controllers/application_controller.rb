@@ -26,6 +26,18 @@ class ApplicationController < ActionController::Base
 		user == current_user
 	end
 
-	helper_method :current_user?
+	def require_admin_user
+    unless current_user.admin?
+      redirect_to root_url, alert: "Unauthorized Access!"
+    end
+  end
+
+  def current_user_admin?
+  	current_user && current_user.admin?
+  end
+
 	helper_method :current_user
+	helper_method :current_user?
+	helper_method :require_admin_user
+	helper_method :current_user_admin?
 end

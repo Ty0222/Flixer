@@ -1,35 +1,38 @@
 describe "Editing A Movie" do
 
-	before { @user = User.create(user_attributes) }
+	context "when admin user" do
 
-	it "updates the movie and shows a movie's updated details with message of success" do
-	  movie = Movie.create(movie_attributes)
+		before { @user = User.create(user_attributes) }
 
-	  login(@user)
-	  visit movie_url(movie)
-	  click_link "Edit"
+		it "updates the movie and shows a movie's updated details with message of success" do
+		  movie = Movie.create(movie_attributes)
 
-	  expect(current_path).to eq(edit_movie_path(movie))
-	  expect(find_field("Title").value).to eq(movie.title)
-	  expect(find_field("Description").value).to eq(movie.description)
-	  expect(find_field("Worldwide Gross").value).to eq(movie.total_gross.to_i.to_s)
+		  login(@user)
+		  visit movie_url(movie)
+		  click_link "Edit"
 
-		select "PG", from: "movie_rating"
-		click_on "Update Movie"
+		  expect(current_path).to eq(edit_movie_path(movie))
+		  expect(find_field("Title").value).to eq(movie.title)
+		  expect(find_field("Description").value).to eq(movie.description)
+		  expect(find_field("Worldwide Gross").value).to eq(movie.total_gross.to_i.to_s)
 
-		expect(current_path).to eq(movie_path(movie))
-		expect(page).to have_content("PG")
-    expect(page).to have_content("Movie successfully updated!")
-	end  
+			select "PG", from: "movie_rating"
+			click_on "Update Movie"
 
-  it "does not update movie and returns error message(s) when invalid" do
-    movie = Movie.create(movie_attributes)
+			expect(current_path).to eq(movie_path(movie))
+			expect(page).to have_content("PG")
+	    expect(page).to have_content("Movie successfully updated!")
+		end  
 
-    login(@user)
-    visit edit_movie_url(movie)
-    fill_in "Title", with: ""
-    click_on "Update Movie"
+	  it "does not update movie and returns error message(s) when invalid" do
+	    movie = Movie.create(movie_attributes)
 
-    expect(page).to have_content("Title can't be blank")
-  end
+	    login(@user)
+	    visit edit_movie_url(movie)
+	    fill_in "Title", with: ""
+	    click_on "Update Movie"
+
+	    expect(page).to have_content("Title can't be blank")
+	  end
+	end
 end

@@ -9,7 +9,7 @@ def movie_attributes(overrides = {})
  	  cast: "Ryan Reynolds",
  	  director: "Tim Miller",
  	  duration: "123 min",
- 	  image: open("#{Rails.root}/app/assets/images/ironman2.jpg")
+ 	  image: open("#{Rails.root}/app/assets/images/ironman2.jpg"),
 	}.merge(overrides)
 end
 
@@ -29,6 +29,7 @@ def user_attributes(overrides = {})
 		username: "Ty0222",
 		email: "kellytyquan@example.com",
 		password: "secret",
-		password_confirmation: "secret"
+		password_confirmation: "secret",
+		admin: true
 	}.merge(overrides)
 end

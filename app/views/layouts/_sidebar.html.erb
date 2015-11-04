@@ -6,7 +6,9 @@
 				<%= link_to "All Movies", movies_path %>
 				</li>
 				<li>
-				<%= link_to "Add New Movie", new_movie_path %>
+				<% if current_user_admin? %>	
+					<%= link_to "Add New Movie", new_movie_path %>
+				<% end %>
 				</li>
 			</ul>
 		</p>
