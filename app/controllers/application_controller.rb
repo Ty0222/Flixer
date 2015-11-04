@@ -8,7 +8,10 @@ class ApplicationController < ActionController::Base
   private
 
   def require_login
-	redirect_to login_path unless logged_in?
+		unless logged_in?
+			session[:intended_url] = request.url
+			redirect_to login_url
+		end 
   end
 
   def current_user

@@ -50,4 +50,16 @@ describe "Signing In" do
 		expect(page).to have_field("Password")
 		expect(page).to have_content("Invalid email/username and/or password combination!")
 	end
+
+	it "redirects to the intended page" do
+		user = User.create!(user_attributes)		
+
+		visit users_url
+		
+		expect(current_path).to eq(login_path)
+
+		login(user)
+
+		expect(current_path).to eq(users_path)
+	end
 end

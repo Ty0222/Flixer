@@ -1,21 +1,18 @@
 class MoviesController < ApplicationController
 	skip_before_action :require_login, only: [:show, :index]
-
+	before_action :set_movie, except: [:index, :new, :create]
 
 	def index
 		@movies = Movie.released_movies
 	end
 
-	def show
-		@movie = Movie.find(params[:id])
+	def show		
 	end
 
 	def edit
-		@movie = Movie.find(params[:id])
 	end
 
 	def update
-		@movie = Movie.find(params[:id])		
 		if @movie.update(movie_params)
 			redirect_to @movie, notice: "Movie successfully updated!"
 		else
@@ -37,7 +34,6 @@ class MoviesController < ApplicationController
 	end
 
 	def destroy
-		@movie = Movie.find(params[:id])
 		@movie.destroy
 		redirect_to movies_url, notice: "Movie successfully deleted!"
 	end
@@ -49,5 +45,9 @@ class MoviesController < ApplicationController
 			permit(:title, :rating, :total_gross,
 			:description, :released_on, :cast,
 			:director, :duration, :image)		
+	end
+
+	def set_movie
+		@movie = Movie.find(params[:id])		
 	end
 end
