@@ -1,5 +1,3 @@
-#app/helpers/movies_helper.rb
-
 describe "#flop?" do
   
 	it "is a flop when movie total gross is less than 50M" do
@@ -30,8 +28,6 @@ describe "#flop?" do
 	end
 end
 
-#app/models/movie.rb
-
 describe "#released_movies" do
   
   it "includes movie(s) when release date date is not beyond today" do
@@ -56,8 +52,6 @@ describe "#released_movies" do
     expect(Movie.released_movies).to eq([movie3, movie2, movie1])
   end
 end
-
-#app/models/movie.rb
 
 describe "A Movie" do
   
@@ -157,9 +151,16 @@ describe "A Movie" do
 
   it "has many reviews" do
     movie = Movie.new(movie_attributes)
-    
-   review1 = movie.reviews.new(review_attributes)
-   review2 = movie.reviews.new(review_attributes(name: "Ty Kelly"))
+    user1 = User.create(user_attributes)
+    user2 = User.create(user_attributes(name: "Sam Kelly"))
+
+    review1 = movie.reviews.new(review_attributes)
+    review1.user = user1
+    review1.save!
+
+    review2 = movie.reviews.new(review_attributes)
+    review2.user = user2
+    review2.save!
 
     expect(movie.reviews).to include(review1)
     expect(movie.reviews).to include(review2)
@@ -167,9 +168,16 @@ describe "A Movie" do
 
   it "deletes all of movie's associated reviews" do
     movie = Movie.create(movie_attributes)
+    user1 = User.create(user_attributes)
+    user2 = User.create(user_attributes(name: "Sam Kelly"))
 
-    movie.reviews.create(review_attributes)
-    movie.reviews.create(review_attributes(name: "Ty Kelly"))
+    review1 = movie.reviews.new(review_attributes)
+    review1.user = user1
+    review1.save!
+
+    review2 = movie.reviews.new(review_attributes)
+    review2.user = user2
+    review2.save!
 
     expect {
       movie.destroy

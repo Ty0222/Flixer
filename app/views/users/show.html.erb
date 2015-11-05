@@ -14,4 +14,21 @@
 			 						data: { confirm: "Are you sure you want to permanently delete your account?" } %>
 		<% end %>
 	</nav>
+	<br />
+	<% if @reviews.any? %>
+	<h3>Reviews</h3>
+	<ol>
+		<% @reviews.find_each do |review| %>
+		<li>
+			(<%= time_ago_in_words(review.created_at).capitalize %> ago)
+			<br />
+			<%= link_to content_tag(:strong, review.movie.title), movie_path(review.movie) %> - <%= pluralize(review.stars, "Star") %>
+			<p>
+				&quot;<%= review.comment %>&quot;
+			</p>
+			<br />
+		</li>
+		<% end %>
+	</ol>
+	<% end %>
 </article>

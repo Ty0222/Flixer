@@ -117,4 +117,21 @@ describe "A User" do
 
 		expect(user.valid?).to eq(true)
 	end
+
+	it "has many reviews" do
+		user = User.new(user_attributes)	
+		movie1 = Movie.new(movie_attributes(title: "Iron Man"))
+		movie2 = Movie.new(movie_attributes(title: "Spider-Man"))
+
+		review1 = movie1.reviews.new(comment: "Awesome!", stars: 5)
+		review1.user = user
+		review1.save!
+
+		review2 = movie2.reviews.new(comment: "Cool", stars: 4)
+		review2.user = user
+		review2.save!
+
+		expect(user.reviews).to include(review1)
+		expect(user.reviews).to include(review2)
+	end
 end

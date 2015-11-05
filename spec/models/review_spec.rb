@@ -2,25 +2,24 @@
 
 describe "A Review" do
 	
-	it " belongs to a movie" do
+	it "belongs to a movie" do
 		movie = Movie.create(movie_attributes)
 		review = movie.reviews.new(review_attributes)
 
 		expect(review.movie).to eq(movie)
 	end
 
+	it "belongs to a user" do
+		user = User.create(user_attributes)
+		review = user.reviews.new(review_attributes)
+
+		expect(review.user).to eq(user)
+	end 
+
 	it "accepts valid entry of data" do
 		review = Review.new(review_attributes)
 
 		expect(review.valid?).to eq(true)
-	end
-
-	it "requires a name" do
-		review = Review.new(name: "")
-
-		review.valid?
-
-		expect(review.errors[:name].any?).to eq(true)
 	end
 
 	it "accepted an approved star rating" do

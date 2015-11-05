@@ -4,10 +4,6 @@
 <%= form_for [@movie, @review] do |f| %>
 <%= render "shared/errors", object: @review %>
 <p>
-<%= f.label :name, "Name" %>
-<%= f.text_field :name, autofocus: true %>
-</p>
-<p>
 <%= f.label :stars, "Star Rating" %>
 <%= f.select :stars, Review::STARS, prompt: "Pick one" %>
 </p>

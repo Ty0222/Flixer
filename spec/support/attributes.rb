@@ -15,7 +15,6 @@ end
 
 def review_attributes(overrides = {})
 	{
-		name: "Robert Ebert",
 		stars: 3,
 		comment: "I laughed, I cried, I spilled my popcorn!",
 		location: "Middletown, New Jersey"
