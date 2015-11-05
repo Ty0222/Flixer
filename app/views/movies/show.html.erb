@@ -2,8 +2,22 @@
 	<header>
 		<%= image_for(@movie) %>
 		<h2><%= @movie.title %></h2>
+		<p>
+			<%= pluralize(@fans.size, "Fan") %>
+		</p>
 	</header>
 	<table>
+		<% if current_user %>
+		<tr>
+			<th>
+				<% if @current_favorite %>
+					<%= button_to "Unfavorite", [@movie, @current_favorite], method: :delete %>
+				<% else %>
+					<%= button_to "Favorite", movie_favorites_path(@movie) %>
+				<% end %>
+			</th>
+		</tr>
+		<% end %>
 		<tr>
 			<th>Rated: </th>
 			<td><%= @movie.rating %></td>

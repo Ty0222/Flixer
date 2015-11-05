@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
 	get "/signup" => "users#new"
 	get "/login" => "sessions#new"
 	resources :users
@@ -6,5 +7,6 @@ Rails.application.routes.draw do
   root "movies#index"	  
   resources :movies do
   	resources :reviews
+  	resources :favorites
   end
 end

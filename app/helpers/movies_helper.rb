@@ -7,11 +7,18 @@ module MoviesHelper
 		end
 	end
 
-	def image_for(movie)
+	def image_for(movie, options={})
 		if movie.image.exists?
-			image_tag(movie.image.url(:default))
+			if options[:type] && options[:type] == :favorite_movie
+				image_tag(movie.image.url(:small))
+			else
+				image_tag(movie.image.url(:default))
+			end 
 		else
-		image_tag("placeholder.png")
+			if options[:type] && options[:type] == :favorite_movie
+			else
+				image_tag("placeholder.png")
+			end
 		end
 	end
 

@@ -192,4 +192,17 @@ describe "A Movie" do
 
     expect(movie.average_stars).to eq(2)
   end
+
+  it "has many fans" do
+    movie = Movie.new(movie_attributes)
+    fan1 = User.new(user_attributes)
+    fan2 = User.new(user_attributes(email: "sam@example.com"))
+
+    movie.favorites.new(user: fan1)
+    movie.favorites.new(user: fan2)
+
+    expect(movie.fans).to include(fan1)
+    expect(movie.fans).to include(fan2)
+  end
+
 end
