@@ -6,6 +6,10 @@
 			<%= pluralize(@fans.size, "Fan") %>
 		</p>
 	</header>
+	<% @genres.each do |genre| %>	
+		<strong>(<%= link_to genre.name, genre_movies_path(genre) %>)</strong>
+	<% end %>
+	<br /><br />
 	<table>
 		<% if current_user %>
 		<tr>

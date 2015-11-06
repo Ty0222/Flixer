@@ -6,6 +6,19 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+User.create!({
+	name: "Ty Kelly",
+	username: "Admin0222",
+	email: "kellytyquan@realitiy.com",
+	password: "secret",
+	password: "secret",
+	admin: true
+	})
+
+Genre.create!([{ name: "Action" }, { name: "Comedy" }, { name: "Drama" }, { name: "Sci-Fi" }])
+Genre.create!([{ name: "Romance" }, { name: "Thriller" }, { name: "Fantasy" }])
+Genre.create!([{ name: "Documentary" }, { name: "Adventure" }, { name: "Animation" }])
+
 Movie.create!([
 	{
 		title: "The Amazing Spider-Man",

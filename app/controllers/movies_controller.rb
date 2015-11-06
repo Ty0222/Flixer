@@ -1,14 +1,20 @@
 class MoviesController < ApplicationController
-	skip_before_action :require_login, only: [:show, :index]
-	before_action :set_movie, except: [:index, :new, :create]
-	before_action :require_admin_user, except: [:index, :show]
+	skip_before_action :require_login, only: [:show, :index, :index_all_from_genre]
+	before_action :set_movie, except: [:index, :index_all_from_genre, :new, :create]
+	before_action :require_admin_user, except: [:index_all_from_genre, :index, :show]
 
 	def index
 		@movies = Movie.released_movies
 	end
 
+	def index_all_from_genre
+		@genre = Genre.find(params[:id])
+		@movies = Movie.all_from_genre(@genre)
+	end
+
 	def show
 		@fans = @movie.fans
+		@genres = @movie.genres
 		if current_user
 			@current_favorite = current_user.favorites.find_by(movie_id: @movie.id)
 		end
@@ -49,7 +55,7 @@ class MoviesController < ApplicationController
 		params.require(:movie).
 			permit(:title, :rating, :total_gross,
 			:description, :released_on, :cast,
-			:director, :duration, :image)		
+			:director, :duration, :image, genre_ids: [])		
 	end
 
 	def set_movie

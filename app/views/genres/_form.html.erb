@@ -1,0 +1,14 @@
+<%= form_for @genre do |f| %>
+<%= render "shared/errors", object: @genre %>
+<p>
+  <%= f.label :name, "Name" %><br />
+  <%= f.text_field :name %>
+</p>
+<p>
+	<% if @genre.new_record? %>
+		<%= f.submit "Add Genre", :disable_with => 'Adding...' %>
+	<% else %>
+		<%= f.submit "Update Genre", :disable_with => 'Updating...' %>
+	<% end %>
+</p>
+<% end %>

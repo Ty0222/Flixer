@@ -1,7 +1,9 @@
 class Movie < ActiveRecord::Base
 	has_many :reviews, dependent: :destroy
 	has_many :favorites, dependent: :destroy
-	has_many :fans, through: :favorites, source: :user 
+	has_many :fans, through: :favorites, source: :user
+	has_many :characterizations, dependent: :destroy
+	has_many :genres, through: :characterizations
 	has_attached_file :image, styles: {
 		default: "214x320>", small: "86x86>"
 	}
@@ -14,6 +16,8 @@ class Movie < ActiveRecord::Base
 	validates :total_gross, numericality: { greater_than_or_equal_to: 0 }
 	RATINGS = %w[G PG PG-13 R NC-17]
 	validates :rating, inclusion: { in: RATINGS }
+
+	scope :all_from_genre, ->(genre) { joins(:genres).where("genres.name = ?", "#{genre.name}") }
 	
 	def flop?
 		if total_gross.blank? || total_gross < 50000000.0 && reviews.size < 51 && reviews.average(:stars).to_i.round < 4

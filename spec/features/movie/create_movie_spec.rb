@@ -2,10 +2,15 @@ describe "Creating A New Movie" do
 
 	context "when admin user" do
 
-		before { @user = User.create(user_attributes) }
+		before do
+			@user = User.create(user_attributes)
+			@genre1 = Genre.create(name: "Genre 1")
+			@genre2 = Genre.create(name: "Genre 2")
+			@genre3 = Genre.create(name: "Genre 3")
+			login(@user)
+		end
 		
 		it "saves a new movie with message of success" do
-			login(@user)
 
 			visit movies_url
 			
@@ -25,18 +30,21 @@ describe "Creating A New Movie" do
 			fill_in "Director", with: "Tim Miller"
 			fill_in "Duration", with: "123 min"
 			attach_file "Image", "#{Rails.root}/app/assets/images/spiderman.jpg"
+			check(@genre1.name)
+			check(@genre2.name)
 
 			click_on "Create Movie"
 
 			expect(current_path).to eq(movie_path(Movie.last))
 			expect(page).to have_content("Movie successfully created!")
 			expect(page).to have_content("The Amazing Spider-Man")
+			expect(page).to have_content(@genre1.name)
+			expect(page).to have_content(@genre2.name)
+			expect(page).not_to have_content(@genre3.name)
 		end
 
 		it "does not save movie and returns error message(s) when invalid" do
 	    movie = Movie.new(movie_attributes(title: ""))
-
-	    login(@user)
 
 	    visit new_movie_url
 

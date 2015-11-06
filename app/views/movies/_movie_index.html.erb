@@ -1,0 +1,48 @@
+<br>
+<article class="movie">
+<% if @movies.empty? %>	
+	<h2>Sorry no movies match this genre.</h2>
+<%else %>
+	<% @movies.each do |movie| %> 
+		<header>
+			<%= image_for(movie) %>
+		<h2><%= link_to(movie.title, movie) %></h2>
+	</header>
+		<table>
+			<tr>
+				<th>Rated: </th>
+				<td><%= movie.rating %></td>
+			</tr>
+			<tr>
+				<th>Release Date: </th>
+				<td><%= movie.released_on.to_s(:release_date) %> (<%= time_ago_in_words(movie.released_on) %> ago) (USA)<td>
+			</tr>
+			<tr>
+				<th>Worldwide Gross: </th>
+				<td><%= format_total_gross(movie) %></td>
+			</tr>
+			<th>Cast</th>
+				<td><%= movie.cast %></td>
+			</tr>
+			<tr>
+				<th>Director</th>
+				<td><%= movie.director %></td>
+			</tr>
+			<tr>
+				<th>Duration</th>
+				<td><%= movie.duration %></td>
+			</tr>
+			<tr>
+				<th>Average Star Rating</th>
+				<td>
+					<%= format_average_stars(movie) %>
+					<%= classic(movie) %>
+				</td>
+			</tr>
+		</table>
+		<p>
+		<%= truncate(movie.description, length: 43, separator: " ") %> (<%= link_to("continued", movie) %>)
+		</p>
+	<% end %>
+<% end %>
+</article>

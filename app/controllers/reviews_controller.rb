@@ -13,7 +13,7 @@ class ReviewsController < ApplicationController
 	def create
 		@review = @movie.reviews.new(review_params)
 		@review.user = current_user
-		#fail
+
 		if @review.save
 			redirect_to movie_reviews_url(@movie), notice: "Thanks for your review!"
 		else
