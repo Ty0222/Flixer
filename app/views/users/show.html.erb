@@ -1,3 +1,5 @@
+<% content_for(:title, @user.name) %>
+
 <article id="user">
 	<header>
 		<h1> Member Since <%= @user.created_at.strftime("%B %Y") %></h1>
@@ -15,15 +17,6 @@
 		<% end %>
 	</nav>
 	<br />
-	<% if @favorite_movies.any? %>
-	<h3>Favorite Movies</h3>
-		<% @favorite_movies.find_each do |movie| %>
-		<li>
-			<%= link_to movie.title, movie %>
-			<%= image_for(movie, type: :favorite_movie) %>
-		</li>
-		<% end %>
-	<% end %>
 	<br />
 	<% if @reviews.any? %>
 	<h3>Reviews</h3>
@@ -42,3 +35,16 @@
 	</ol>
 	<% end %>
 </article>
+<% content_for(:side) do %>
+	<% if @favorite_movies.any? %>
+	<ul>
+	<h3>Fav Movies</h3>
+		<% @favorite_movies.find_each do |movie| %>
+		<li>
+			<%= link_to movie.title, movie %>
+			<%= image_for(movie, type: :favorite_movie) %>
+		</li>
+		<% end %>
+	</ul>
+	<% end %>
+	<% end %>

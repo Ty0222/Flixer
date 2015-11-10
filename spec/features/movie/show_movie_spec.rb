@@ -51,4 +51,12 @@ describe "Viewing an individual movie" do
     expect(page).to have_content("**")
     expect(page).to_not have_content("No reviews")
   end
+
+  it "includes a movie's title in the page title tab" do
+    movie = Movie.create(movie_attributes)
+
+    visit movie_url(movie)
+
+    expect(page).to have_title("Flixer - #{movie.title}")
+  end
 end

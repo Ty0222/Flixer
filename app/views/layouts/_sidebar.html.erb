@@ -9,9 +9,11 @@
 				<%= link_to "All Genres", genres_path %>
 				</li>
 				<% if current_user_admin? %>
+					<% if controller_path == "movies" %>
 					<li>
 					<%= link_to "Add New Movie", new_movie_path %>
 					</li>
+					<% end %>
 					<% if controller_path == "genres" %>
 					<li>
 						<%= link_to "Add New Genre", new_genre_path %>
@@ -21,4 +23,5 @@
 			</ul>
 		</p>
 	</nav>
+	<%= content_for(:side) %>
 	</aside>
