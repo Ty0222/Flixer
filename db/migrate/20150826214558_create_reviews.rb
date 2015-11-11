@@ -5,7 +5,7 @@ class CreateReviews < ActiveRecord::Migration
       t.integer :stars
       t.text :comment
       t.string :location
-      t.references :movie, index: true
+      t.string :movie_slug, index: true
 
       t.timestamps
     end

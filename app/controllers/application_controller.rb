@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-		@current_user ||= User.find(session[:user_id]) if session[:user_id]
+		@current_user ||= User.find_by(username: session[:user_id]) if session[:user_id]
 	end
 
 	def logged_in?
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def current_user?(user)
-		user == current_user
+		user.username == current_user.username
 	end
 
 	def require_admin_user

@@ -3,8 +3,8 @@
 describe "Viewing List Of Users" do
 
 	it "shows all users" do
-		user1 = User.create(user_attributes)
-		user2 = User.create(user_attributes(name: "Bob Sanders", username: "Bob12", email: "sandersbob@example.com"))
+		user1 = User.create(user_attributes(admin: false))
+		user2 = User.create(user_attributes(admin: false, name: "Bob Sanders", username: "Bob12", email: "sandersbob@example.com"))
 
 		login(user1)
 		visit users_url

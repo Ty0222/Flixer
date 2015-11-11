@@ -17,7 +17,7 @@ describe "Creating A User" do
 		
 		click_button "Create Account"
 
-		expect(current_path).to eq(user_path(User.last))
+		expect(current_path).to eq(user_path(User.last.username))
 		
 		expect(page).to have_content("Jean12")
 		expect(page).to have_content("Account Settings")

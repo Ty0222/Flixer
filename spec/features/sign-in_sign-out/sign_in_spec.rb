@@ -26,7 +26,7 @@ describe "Signing In" do
 
 		click_button "Log In"
 
-		expect(current_path).to eq(user_path(user))
+		expect(current_path).to eq(user_path(user.username))
 		expect(page).to have_content("Welcome back Ty!")
 		expect(page).to have_content("Ty0222")
 		expect(page).to have_content("Account Settings")

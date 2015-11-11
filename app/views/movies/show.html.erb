@@ -17,7 +17,7 @@
 		<tr>
 			<th>
 				<% if @current_favorite %>
-					<%= button_to "Unfavorite", [@movie, @current_favorite], method: :delete %>
+					<%= button_to "Unfavorite", movie_favorite_path(@movie, @current_favorite), method: :delete %>
 				<% else %>
 					<%= button_to "Favorite", movie_favorites_path(@movie) %>
 				<% end %>
@@ -70,7 +70,7 @@
 <p class="movie">
 <% if current_user_admin? %>	
 	<%= link_to "Edit", edit_movie_path(@movie) %> |
-	<%= link_to "Delete", movie_path(@movie), method: :delete,
+	<%= link_to "Delete", @movie, method: :delete,
 			data: {confirm: "Are you sure?"} %>
 <% end %>
 </p>

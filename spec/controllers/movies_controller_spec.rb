@@ -6,7 +6,7 @@ describe MoviesController do
 
 		before do
 			@user = User.create(user_attributes(admin: false))
-			session[:user_id] = @user
+			session[:user_id] = @user.username
 		end
 		
 		it "cannot access new action" do

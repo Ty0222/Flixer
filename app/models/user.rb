@@ -10,6 +10,13 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: /\A\S+@\S+\z/,
   					uniqueness: { case_sensitive: false }
 
+  scope :by_name, -> { order(:name) }
+  scope :non_admins, -> { by_name.where(admin: false) }
+
+  def self.to_param
+    username
+  end
+
   def gravatar_id
   	Digest::MD5::hexdigest(email.downcase)
   end

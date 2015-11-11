@@ -7,9 +7,9 @@ class SessionsController < ApplicationController
 
 	def create
 		if user = User.authenticate(params[:email], params[:password])
-			session[:user_id] = user.id
+			session[:user_id] = user.username
 			flash[:notice] = "Welcome back #{user.first_name}!"
-			redirect_to (session[:intended_url] || user)
+			redirect_to (session[:intended_url] || user_path(user.username))
 			session[:intended_url] = nil
 		else
 			flash.now[:alert] = "Invalid email/username and/or password combination!"

@@ -32,7 +32,7 @@ describe "#released_movies" do
   
   it "includes movie(s) when release date date is not beyond today" do
     movie1 = Movie.create(movie_attributes)
-    movie2 = Movie.create(movie_attributes(released_on: (Time.now).to_s))
+    movie2 = Movie.create(movie_attributes(title: "Deadpool", released_on: (Time.now).to_s))
     
     expect(Movie.released_movies).to include(movie1)
     expect(Movie.released_movies).to include(movie2)
@@ -46,8 +46,8 @@ describe "#released_movies" do
       
   it "returns movies in descending order (from most recent)" do
     movie1 = Movie.create(movie_attributes(released_on: Date.today-3))      
-    movie2 = Movie.create(movie_attributes(released_on: Date.today-2))      
-    movie3 = Movie.create(movie_attributes(released_on: Date.today-1))      
+    movie2 = Movie.create(movie_attributes(title: "Deadpool", released_on: Date.today-2))      
+    movie3 = Movie.create(movie_attributes(title: "Peter Pan", released_on: Date.today-1))      
   
     expect(Movie.released_movies).to eq([movie3, movie2, movie1])
   end
@@ -156,11 +156,9 @@ describe "A Movie" do
 
     review1 = movie.reviews.new(review_attributes)
     review1.user = user1
-    review1.save!
 
     review2 = movie.reviews.new(review_attributes)
     review2.user = user2
-    review2.save!
 
     expect(movie.reviews).to include(review1)
     expect(movie.reviews).to include(review2)
@@ -193,6 +191,30 @@ describe "A Movie" do
     expect(movie.average_stars).to eq(2)
   end
 
+  it "auto-generates a slug when created" do
+    movie = Movie.create(movie_attributes(title: "X-Men: The Last Stand"))
+
+    expect(movie.slug).to eq("x-men-the-last-stand")
+  end
+
+  it "requires a unique title" do
+    movie1 = Movie.create(movie_attributes)
+    movie2 = Movie.new(movie_attributes)
+
+    movie2.valid?
+
+    expect(movie2.errors[:title].first).to eq("has already been taken")
+  end
+
+  it "requires a unique slug" do
+    movie1 = Movie.create(movie_attributes)
+    movie2 = Movie.new(movie_attributes(slug: movie1.slug))
+
+    movie2.valid?    
+
+    expect(movie2.errors[:slug].first).to eq("has already been taken")
+  end
+
   it "has many fans" do
     movie = Movie.new(movie_attributes)
     fan1 = User.new(user_attributes)
@@ -203,6 +225,61 @@ describe "A Movie" do
 
     expect(movie.fans).to include(fan1)
     expect(movie.fans).to include(fan2)
+  end
+
+  context "upcoming scope" do
+    it "returns the movies with a released on date in the future" do
+      movie1 = Movie.create!(movie_attributes(released_on: 3.months.ago))
+      movie2 = Movie.create!(movie_attributes(title: "Deadpool", released_on: 3.months.from_now))
+
+      expect(Movie.upcoming).to eq([movie2])
+    end
+  end
+
+  context "rated scope" do
+    it "returns released movies with the specified rating" do
+      movie1 = Movie.create!(movie_attributes(released_on: 3.months.ago, rating: "PG"))
+      movie2 = Movie.create!(movie_attributes(title: "Deadpool", released_on: 3.months.ago, rating: "PG-13"))
+      movie3 = Movie.create!(movie_attributes(title: "Peter Pan", released_on: 1.month.from_now, rating: "PG"))
+
+      expect(Movie.rated("PG")).to eq([movie1])
+    end
+  end
+
+  context "recent scope" do
+    
+    before do
+      @movie1 = Movie.create!(movie_attributes(released_on: 3.months.ago))
+      @movie2 = Movie.create!(movie_attributes(title: "Deadpool", released_on: 2.months.ago))
+      @movie3 = Movie.create!(movie_attributes(title: "Deadpool2", released_on: 1.month.ago))
+      @movie4 = Movie.create!(movie_attributes(title: "Deadpool3", released_on: 1.week.ago))
+      @movie5 = Movie.create!(movie_attributes(title: "Deadpool4", released_on: 1.day.ago))
+      @movie6 = Movie.create!(movie_attributes(title: "Deadpool5", released_on: 1.hour.ago))
+      @movie7 = Movie.create!(movie_attributes(title: "Deadpool6", released_on: 1.day.from_now))
+    end
+
+    it "returns a specified number of released movies ordered with the most recent movie first" do
+      expect(Movie.recent(2)).to eq([@movie6, @movie5])
+    end
+
+    it "returns a default of 3 released movies ordered with the most recent movie first" do
+      expect(Movie.recent).to eq([@movie6, @movie5, @movie4])
+    end
+  end
+
+  context "all_from_genre scope" do
+
+    it "shows only action movies" do
+      movie1 = Movie.create(movie_attributes)
+      movie2 = Movie.create(movie_attributes(title: "Deadpool"))
+
+      genre = Genre.create(name: "Action")
+
+      movie1.genres << genre
+      movie2.genres << genre
+
+      expect(Movie.all_from_genre(genre)).to eq([movie1, movie2])
+    end
   end
 
 end

@@ -147,4 +147,15 @@ describe "A User" do
     expect(user.favorite_movies).to include(movie2)
   end
 
+  context "non_admins scope" do
+  	
+  	it "shows only non admin users in alphabetical order" do
+  		admin = User.create(user_attributes)
+  		user1 = User.create(user_attributes(name: "Al", email: "norm1@example.com", username: "N0223", admin: false))
+  		user2 = User.create(user_attributes(name: "Sal", email: "norm2@example.com", username: "N0224", admin: false))
+
+  		expect(User.non_admins).to eq([user1, user2])
+  	end
+  end
+
 end

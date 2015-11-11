@@ -6,6 +6,19 @@
 				<%= link_to "All Movies", movies_path %>
 				</li>
 				<li>
+					<%= link_to "Upcoming", filtered_movies_path(:upcoming) %>
+				</li>
+				<li>
+					<%= link_to "Recent", filtered_movies_path(:recent) %>
+				</li>
+				<li>
+					<%= link_to "Flops", filtered_movies_path(:flops) %>
+				</li>
+				<li>
+					<%= link_to "Hits", filtered_movies_path(:hits) %>
+				</li>
+				<br />
+				<li>
 				<%= link_to "All Genres", genres_path %>
 				</li>
 				<% if current_user_admin? %>

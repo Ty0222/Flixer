@@ -42,7 +42,7 @@ describe UsersController do
 			
 		before do
 		 @wrong_user = User.create(user_attributes(email: "wrong@example.com", username: "WR0222"))
-			session[:user_id] = @wrong_user
+			session[:user_id] = @wrong_user.username
 		end
 
 		it "cannot edit another user" do

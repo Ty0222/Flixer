@@ -1,5 +1,5 @@
 class Review < ActiveRecord::Base
-  belongs_to :movie
+  belongs_to :movie, foreign_key: "movie_slug"
   belongs_to :user
 
   validates :comment, length: { minimum: 4 }

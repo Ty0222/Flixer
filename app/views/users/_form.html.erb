@@ -24,9 +24,10 @@
 <p>
 	<% if @user.new_record? %>
 		<%= f.submit "Create Account", :disable_with => "Creating..." %>
+		<%= link_to "Cancel", root_path %>
 	<% else %>
 		<%= f.submit "Update Account", :disable_with => "Updating..." %>
+		<%= link_to "Cancel", user_path(@user.username) %>
 	<% end %>
-	<%= link_to "Cancel", movies_path %>
 </p>
 <% end %>

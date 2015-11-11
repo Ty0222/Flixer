@@ -1,13 +1,13 @@
 <header>
 	<h2>
-		Reviews for <%= link_to @movie.title, movie_path(@movie) %>
+		Reviews for <%= link_to @movie.title, @movie %>
 	</h2>
 </header>
 
 <ol>
 	<% @reviews.each do |review| %>
 	<li>
-		<h3><%= profile_image_for(review.user, size: 30) %> <%= link_to(review.user.name, review.user) %> -
+		<h3><%= profile_image_for(review.user, size: 30) %> <%= link_to(review.user.name, user_path(review.user.username)) %> -
 		 <%= review.location %>
 		</h3>
 		<h3>
