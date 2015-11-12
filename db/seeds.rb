@@ -34,8 +34,7 @@ Movie.create!([
 		released_on: "2012-07-03",
 		cast: "Andrew Garfield, Emma Stone, Rhys Ifans, Denis Leary",
 		director: "Marc Webb",
-		duration: "136 min",
-		image_file_name: "http://3.bp.blogspot.com/-wmVZ6Sr0r1U/T-rrtHWcDsI/AAAAAAAACJY/aI95c8c4vfM/s400/The-Amazing-Spider-Man-movie-poster-(2012)-picture.jpg"
+		duration: "136 min"
 	},
 	{
 		title: "Iron Man 2",
@@ -54,8 +53,7 @@ Movie.create!([
 		released_on: "2010-05-07",
 		cast:"Robert Downey Jr., Gwyneth Paltrow , Don Cheadle, Scarlett Johansson",
 		director: "Jon Favreau",
-		duration: "125 min",
-		image_file_name: "http://www.imovie-dl9.com/upload/post_tt1228705.jpg"
+		duration: "125 min"
 	},
 	{
 		title: "The Dark Knight",
@@ -73,8 +71,7 @@ Movie.create!([
 		released_on: "2008-07-24",
 		cast: "Christian Bale, Michael Caine, Heath Ledger, Gary Oldman",
 		director: "Christopher Nolan",
-		duration: "152 min",
-		image_file_name: "http://ecx.images-amazon.com/images/I/519HHS8upDL._AC_UL320_SR214,320_.jpg"
+		duration: "152 min"
 	},
 	{
 		title: "Free Willy 3",
@@ -88,8 +85,7 @@ Movie.create!([
 		released_on: "1993-07-16",
 		cast: "Jason James Richter, August Schellenberg, Annie Corley, Vincent Berry",
 		director: "Sam Pillsbury",
-		duration: "86 min",
-		image_file_name: "http://3.bp.blogspot.com/-4iWyoOVGZaM/TopBo_INdVI/AAAAAAAAAUo/-Rt8bXSZCkw/s1600/Free+Willy+%25233+The+Rescue.jpg"
+		duration: "86 min"
 	},
 	{
 		title: "Catwoman",
@@ -102,8 +98,7 @@ Movie.create!([
 		released_on: "2004-07-23",
 		cast: "Halle Berry, Benjamin Bratt, Lambert Wilson, Frances Conroy",
 		director: "Pitof",
-		duration: "104 min",
-		image_file_name: "http://4.bp.blogspot.com/_FvIPmG6kolA/TJFL-3sBLyI/AAAAAAAAEn8/hLrPfwNVaoY/s320/200801114109_98167000-pelicula-catwoman.jpg"
+		duration: "104 min"
 	},
 	{
 		title: "Superman",
@@ -118,7 +113,6 @@ Movie.create!([
 		released_on:"1978-12-15",
 		cast: "Marlon Brando, Gene Hackman, Christopher Reeve, Ned Beatty",
 		director: "Richard Donner",
-		duration: "143 min",
-		image_file_name: "http://ecx.images-amazon.com/images/I/511mnuIIBNL._AC_UL320_SR214,320_.jpg"
+		duration: "143 min"
 	}
 ])
