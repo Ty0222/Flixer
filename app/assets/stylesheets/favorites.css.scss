@@ -1,3 +1,45 @@
 // Place all the styles related to the favorites controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "colors", "borders";
+
+
+section.favorites {
+	background: $quaternary-color;
+	position: fixed;
+	width: 200px;
+	height: 100px;
+	top: 480px;
+	right: -7px;
+	padding: 30px;
+	border: 1px solid $primary-color;
+	border-right: none;
+	border-radius: $secondary-bg-radius;
+	overflow-y: scroll;
+
+	.favorites-header {
+		margin-bottom: 20px;
+		margin-top: -20px;
+		color: $primary-text-color;
+		font-family: Verdana, Arial, Sans-serif;
+		font-size: 17px;
+		text-align: center;
+	}
+
+	.favorite-movie-container {
+		margin-top: 25px;
+		text-align: center;
+
+		.favorite-movie-link {
+			color: $tertiary-text-color;
+			font-family: Verdana, Arial, Sans-serif;
+			font-size: 15px;
+			text-decoration: none;
+		}
+
+		.favorite-movie-link:hover {
+			color: $secondary-text-color;
+		}
+	}
+}

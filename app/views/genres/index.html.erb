@@ -1,11 +1,18 @@
+<div class="clear"></div>
 <header>
-	<h1>Genres</h1>
+	<div class="title-header">
+		Genres
+	</div>
 </header>
+<article class="genre">
+	<% @genres.each do |genre| %>
+	<div class="genre-container">
+		<%= link_to genre.name, genre_movies_path(genre), class: "genre-name" %>
 
-<ul>
-<% @genres.each do |genre| %>
-	<li><%= link_to genre.name, genre_movies_path(genre) %> 
-		<% if current_user_admin? %> - <%= link_to "Edit", edit_genre_path(genre) %> - <%= link_to "Delete", genre, method: :delete, data: { confirm: "Are you sure?" } %></li>
+		<% if current_user_admin? %> 
+			<%= link_to "Edit", edit_genre_path(genre), class: "edit-genre" %>
+			<%= link_to "Delete", genre, method: :delete, data: { confirm: "Are you sure?" }, class: "delete-genre" %>
 		<% end %>
-<% end %>
-</ul>
+	</div>
+	<% end %>
+</article>

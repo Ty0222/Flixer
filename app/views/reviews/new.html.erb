@@ -1,18 +1,23 @@
+<div class="clear"></div>
 <header>
-	<h1>Write Your Review Below!</h1>
+	<div class="title-header">
+		Write Your Review Below!
+	</div>
 </header>
 <%= form_for [@movie, @review] do |f| %>
-<%= render "shared/errors", object: @review %>
-<p>
-<%= f.label :stars, "Star Rating" %>
-<%= f.select :stars, Review::STARS, prompt: "Pick one" %>
-</p>
-<p>
-<%= f.label :comment, "Comment" %>
-<%= f.text_area :comment, cols: 80, placeholder: "What did you think?" %>
-</p>
-<p>
-<%= f.submit "Post Review", :disable_with => "Posting..." %>
-<%= link_to "Cancel", @movie %>
-</p>
+<article class="form review-form">
+	<%= render "shared/errors", object: @review %>
+	<div class="form-container">
+		<div class="select-container">
+		<%= f.select :stars, Review::STARS, prompt: "How would you rate this movie?" %>
+		</div>
+		<div class="field-area-container">
+		<%= f.text_area :comment, cols: 80, placeholder: "What did you think?", class: "field-area text-area" %>
+		</div>
+		<div class="submit-cancel-container">
+		<%= f.submit "Post Review", class: "submit-btn" %>
+		<%= link_to "Cancel", @movie, class: "cancel-link" %>
+		</div>
+	</div>
+	</article>
 <% end %>

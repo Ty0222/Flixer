@@ -14,7 +14,7 @@ describe "Creating Review For A Movie" do
 			expect(current_path).to eq(new_movie_review_path(movie))
 
 			select 3, from: "review_stars"
-			fill_in "Comment", with: "I laugh, I cried, I spilled my popcorn!"
+			fill_in "review[comment]", with: "I laugh, I cried, I spilled my popcorn!"
 			click_button "Post Review"		
 
 			expect(current_path).to eq(movie_reviews_path(movie))

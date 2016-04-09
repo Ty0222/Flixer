@@ -7,7 +7,7 @@ class Movie < ActiveRecord::Base
 	has_many :characterizations, dependent: :destroy, foreign_key: "movie_slug"
 	has_many :genres, through: :characterizations
 	has_attached_file :image, styles: {
-		default: "214x320>", small: "49x75>"
+		default: "350x500>", med: "130x200", small: "49x75>"
 	}
 	
 	before_validation :generate_slug
@@ -26,7 +26,7 @@ class Movie < ActiveRecord::Base
 	scope :all_from_genre, ->(genre) { joins(:genres).where("genres.name = ?", "#{genre.name}") }
 	scope :released_movies, -> { where("released_on <= ?", Time.now).order(released_on: :desc) }
 	scope :rated, ->(rating) { released_movies.where("rating = ?", rating) }
-	scope :upcoming, -> { where("released_on >= ?", Time.now) }
+	scope :upcoming, -> { where("released_on > ?", Time.now) }
 	scope :recent, -> (limit=3) { released_movies.limit(limit) }
 	scope :flops, -> { released_movies.where("total_gross < ?", 50000000.0) }
 	scope :hits, -> { released_movies.where("total_gross >= ?", 400000000.0) }
@@ -54,6 +54,10 @@ class Movie < ActiveRecord::Base
 
 	def classic?
 		reviews.size > 50 && reviews.average(:stars).to_i.round >= 4		
+	end
+
+	def exist?
+		is_a? Integer
 	end
 
 end

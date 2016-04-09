@@ -8,20 +8,20 @@ describe "Editing A Genre" do
 	end
 	
 	context "when logged in as an admin" do
-		# add expect(current_path).to eq(genres_path)
+		
 		it "updates the genre and shows details with message of success" do
 			expect(find_field("Name").value).not_to eq(nil)
 
-			fill_in "Name", with: "Genre 2"
+			fill_in "genre[name]", with: "Genre 2"
 			click_button "Update Genre"
 
-			expect(current_path).to eq(root_path)
+			expect(current_path).to eq(genres_path)
 			expect(page).to have_content("Genre successfully updated!")
 			expect(Genre.first.name).to eq("Genre 2")
 		end
 
 		it "does not update the genre when invalid" do
-			fill_in "Name", with: ""
+			fill_in "genre[name]", with: ""
 
 			expect{
 				click_button "Update Genre"

@@ -7,14 +7,13 @@ describe "Editing A User" do
 
 		visit edit_user_url(@user.username)
 
-		fill_in "Full Name", with: @user.name
-		fill_in "Username", with: @user.username
-		fill_in "Email", with: @user.email
+		fill_in "user[name]", with: @user.name
+		fill_in "user[username]", with: @user.username
+		fill_in "user[email]", with: @user.email
 		click_button "Update Account"
 
 		expect(current_path).to eq(user_path(@user.username))
 		expect(page).to have_content(@user.username)		
-		expect(page).to have_content(@user.email)
 		expect(page).to have_content("Account successfully updated!")		
 	end
 
@@ -22,7 +21,7 @@ describe "Editing A User" do
 		login(@user)
 		visit edit_user_url(@user)
 
-		fill_in "Name", with: ""
+		fill_in "user[name]", with: ""
 		click_button "Update Account"
 		
 		expect(page).not_to have_content("Jean12")

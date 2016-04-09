@@ -10,18 +10,19 @@ describe "Unfavoriting A Movie" do
 		
 		visit movie_url(movie)
 
-		click_button "Favorite"
+		find(".fav-btn a").click
 
 		expect(page).to have_content("1 Fan")
+		expect(page).to have_css(".unfav")
 
 		expect {
-			click_button "Unfavorite"
+			find(".fav-btn a").click
 		}.to change(@user.favorites, :count).by(-1)
 
 		expect(current_path).to eq(movie_path(movie))
 		expect(page).to have_content("0 Fans")
 		expect(page).not_to have_content("1 Fan")
-		expect(page).to have_button("Favorite")
+		expect(page).to have_css(".fav")
 		expect(page).not_to have_button("Unfavorite")
 	end
 

@@ -1,5 +1,3 @@
-#app/views/users/new.html.erb & app/views/users/show.html.erb
-
 describe "Creating A User" do
 
 	it "saves a new user with a message of success"	do
@@ -9,11 +7,11 @@ describe "Creating A User" do
 
 		expect(current_path).to eq(signup_path)
 
-		fill_in "Full Name", with: "Billy Jean"
-		fill_in "Username", with: "Jean12"
-		fill_in "Email", with: "jeanbilly@example.com"
-		fill_in "Password", with: "secret"
-		fill_in "Confirm Password", with: "secret"
+		fill_in "user[name]", with: "Billy Jean"
+		fill_in "user[username]", with: "Jean12"
+		fill_in "user[email]", with: "jeanbilly@example.com"
+		fill_in "user[password]", with: "secret"
+		fill_in "user[password_confirmation]", with: "secret"
 		
 		click_button "Create Account"
 
@@ -21,7 +19,6 @@ describe "Creating A User" do
 		
 		expect(page).to have_content("Jean12")
 		expect(page).to have_content("Account Settings")
-		expect(page).to have_content("jeanbilly@example.com")
 		expect(page).to have_content("Thanks for signing up!")
 		expect(page).to have_link("Log Out")
 		expect(page).not_to have_link("Log In")

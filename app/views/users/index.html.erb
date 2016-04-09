@@ -1,11 +1,17 @@
+<div class="clear"></div>
 <header>
-	<h1><%= pluralize(@users.count, "User") %></h1>
+	<div class="title-header">
+		<%= pluralize(@users.count, "User") %>
+	</div>
 </header>
 <% @users.each do |user| %>
-<ul id="users">
-	<li>
-		<%= link_to user.name, user_path(user.username) %>
-	</li>
-</ul>
+<article class="users">
+	<div class="users-container">
+		<%= link_to user.name, user_path(user.username), class: "users-name" %>
+	</div>
+</article>
+<% end %>
 
+<% if @users.empty? %>
+	<div class="no-users"></div>
 <% end %>

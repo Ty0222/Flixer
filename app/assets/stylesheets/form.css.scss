@@ -1,0 +1,200 @@
+@import "colors", "borders";
+
+
+article.form {
+  position: relative;
+
+	.form-container {
+	  background: url("secondary_bg.png") no-repeat;
+	  max-width: 500px;
+	  width: 100%;
+	  margin: 0 auto;
+	  border-radius: $secondary-bg-radius-form;
+
+		.field-area-container {
+		  position: relative;
+		  max-width: 400px;
+		  width: 100%;
+		  margin: 0 auto;
+
+		  .field-area {
+		    background: $text-field-color;
+		    max-width: 377px;
+		    width: 100%;
+		    height: 50px;
+		    margin-top: 30px;
+		    padding-left: 23px;
+		    color: $secondary-text-color;
+		    border: 0.5px solid;
+		    border-radius: $secondary-bg-radius-form;
+		    box-shadow: 5px 5px 5px rgba(0,0,0, .65) inset;
+		    font-size: 16px;
+		    font-family: Verdana, Arial, Sans-serif;
+
+		    &:focus {
+		    	outline: 1px solid $secondary-color;
+		    }
+		  }
+
+		  ::-webkit-input-placeholder {
+		    color: $primary-text-color;
+		  }
+
+		  ::-moz-placeholder {
+		    color: $primary-text-color;
+		  }
+
+		  .text-area {
+		  	max-height: 300px;
+		  	height:100%;
+		  	padding-top: 15px;
+		  }
+		}  
+
+		.select-container {
+		  max-width: 300px;
+		  width: 100%;
+		  margin: 0 auto;
+
+		  select {
+		  	background: $quaternary-color;
+		    max-width: 300px;
+		    width: 100%;
+		    height: 50px;
+		    margin-top: 30px;
+		    color: $primary-text-color;
+		    border: 0.5px solid $secondary-text-color;
+		    border-radius: $secondary-bg-radius-form;
+		    font-size: 16px;
+		    font-family: Verdana, Arial, Sans-serif;
+
+		    &:focus {
+		    	outline: 1px solid $secondary-color;
+		    	color: $secondary-text-color;
+		    } 
+		  }
+		}
+
+		.date-select {
+			max-width: 100px;
+			display: inline;
+			margin-left: 65px;
+
+			#movie_released_on_1i, #movie_released_on_2i,
+			#movie_released_on_3i {
+				max-width: 100px;
+				width: 100%;
+				margin-right: 30px;
+			}
+		}
+
+		.check-box-container {
+			box-sizing: border-box;
+			width: 400px;
+			margin: 30px auto 0;
+			padding: 15px;
+			border: 1px solid $secondary-color;
+			border-radius: $secondary-bg-radius-form;
+			text-align: center;
+
+			label {
+				margin-left: 3px;
+				margin-right: 12px;
+				color: $primary-text-color;
+				font-family: Verdana, Arial, Sans-serif;
+			}
+		}
+
+		.file-upload-container {
+			max-width: 215px;
+			width:100%;
+			margin: 0 auto;
+			
+			input[type="file"] {
+				max-width: 215px;
+				width:100%;
+		    margin-top: 30px;
+		    padding: 5px;
+		    color: $primary-text-color;
+		    border: 0.5px solid $secondary-text-color;
+		    border-radius: $secondary-bg-radius-form;
+		    font-size: 12px;
+		    font-family: Verdana, Arial, Sans-serif;
+			}
+		}
+
+		.image-preview-container {
+			max-width: 130px;
+			width: 100%;
+			margin: 15px auto 0;
+		}
+
+		.submit-cancel-container {
+			max-width: 200px;
+			width: 100%;
+			margin: 30px auto 0;
+
+			.submit-btn {
+				background: url("sign_in_up_btn.png");
+				max-width: 200px;
+				width: 100%;
+				height: 45px;
+				color: $secondary-text-color;
+				border: none;
+				border-radius: $secondary-bg-radius-form;
+				font-family: Verdana, Arial, Sans-serif;
+				font-size: 13px;
+				transition: 0.9s;
+			}
+
+			.submit-btn:hover {
+				box-shadow: 0 0 20px 1px $secondary-color;
+		    transition: 0.9s;
+			}
+
+			.cancel-link {
+				display: inline-block;
+				width: 200px;
+				margin-top: 10px;
+				margin-bottom: 10px;
+				color: darken($primary-text-color, 60%);
+				font-family: Verdana, Arial, Sans-serif;
+				font-size: 13px;
+				text-align: center;
+			}
+
+			.cancel-link:hover {
+				color: $quaternary-text-color;
+			}
+		}
+
+		.signup-container {
+			margin: 30px auto 0;
+			padding-bottom: 10px;
+			color: darken($primary-text-color, 60%);
+			font-family: Verdana, Arial, Sans-serif;
+			font-size: 13px;
+			text-align: center;
+
+			.signup-link {
+				color: $tertiary-text-color;
+			}
+
+			.signup-link:hover {
+				color: $secondary-text-color;
+			}
+		}
+  }
+}
+
+.genre-form {
+	margin-bottom: 221px;
+}
+
+.review-form {
+	margin-bottom: 131px;
+}
+
+.session-form {
+	margin-bottom: 81px;
+}

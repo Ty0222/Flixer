@@ -1,16 +1,14 @@
 <header id="page-header">
-	<p>
-		<%= image_tag("flixer_logo.png") %> 
-	</p>
-	<h1>Flixer</h1>
-	<h4>
-	<% if current_user %>
-		<%= link_to current_user.username, user_path(current_user.username) %> |
-		<%= link_to "Account Settings", edit_user_path(current_user.username) %> | 
-		<%= link_to "Log Out", session_path, method: :delete %>
-	<% else %>
-		<%= link_to "Sign Up", signup_path %> |
-		<%= link_to "Log In", new_session_path %>
-	<% end %>
-	</h4>
+	<div id="header-container">
+		<%= link_to image_tag("flixer_logo.png", class: "flixer-logo"), root_path %> 
+		<div class="navbar-container">
+			<% if current_user %>
+				<%= link_to current_user.username, user_path(current_user.username), class: "navbar-content" %> |
+				<%= link_to "Account Settings", edit_user_path(current_user.username), class: "navbar-content" %> | 
+				<%= link_to "Log Out", session_path, method: :delete, class: "navbar-content" %>
+			<% else %>
+				<%= link_to "Sign Up", signup_path, class: "navbar-content" %> | <%= link_to "Log In", new_session_path, class: "navbar-content" %>
+			<% end %>
+		</div>
+	</div>
 </header>

@@ -9,25 +9,28 @@ module MoviesHelper
 
 	def image_for(movie, options={})
 		if movie.image.exists?
-			if options[:type] && options[:type] == :favorite_movie
+			if options[:type] && (options[:type] == :favorite_movie || options[:type] == :small)
 				image_tag(movie.image.url(:small))
+			elsif options[:type] && options[:type] == :med
+				image_tag(movie.image.url(:med))
 			else
 				image_tag(movie.image.url(:default))
 			end 
 		else
-			if options[:type] && options[:type] == :favorite_movie
-			else
-				image_tag("placeholder.png")
-			end
+			image_tag("placeholder.png")
 		end
 	end
 
 	def format_average_stars(movie)
 		if movie.average_stars.nil?
-			content_tag(:strong, "No reviews")
+			content_tag(:strong, "No reviews", class: "no-review")
 		else
-			"*" * movie.average_stars.round
+			movie.average_stars.round
 		end 
+	end
+
+	def ratings_exist(review_rating)
+		review_rating.kind_of? Integer
 	end
 
 	def classic(movie)
@@ -35,6 +38,12 @@ module MoviesHelper
 			content_tag(:strong, "Classic!")
 		else
 			nil
+		end
+	end
+
+	def themed_page_bg(movie)
+		if movie.image
+			image_tag(movie.image.original_filename, class: "show-page-bg")
 		end
 	end
 end

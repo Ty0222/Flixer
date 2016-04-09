@@ -27,8 +27,6 @@ describe "Viewing Reviews" do
 		expect(page).to have_content(review1.user.name)
 		expect(page).to have_content(review2.user.name)
 		expect(page).to have_content(review1.comment)
-		expect(page).to have_content(review2.location)
-		expect(page).to have_content(review1.stars)
 		expect(page).to_not have_content(review3.user.name)
 	end
 

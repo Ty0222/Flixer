@@ -7,7 +7,7 @@ describe "Creating A Genre" do
 	end
 	
 	context "when logged as an admin" do
-		# add expect(current_path).to eq(genres_path)
+
 		it "saves a new genre with message of success" do
 			expect(current_path).to eq(new_genre_path)
 			expect(find_field("Name").value).to eq(nil)
@@ -15,12 +15,12 @@ describe "Creating A Genre" do
 			fill_in "Name", with: "Horror"
 			click_button "Add Genre"
 
-			expect(current_path).to eq(root_path)
+			expect(current_path).to eq(genres_path)
 			expect(page).to have_content("New genre added!")
 		end
 
 		it "does not save a genre when invalid" do
-			fill_in "Name", with: ""
+			fill_in "genre[name]", with: ""
 
 			expect(page).not_to have_content("New Genre Added!")
 			expect{

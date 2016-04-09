@@ -1,21 +1,31 @@
+<div class="clear"></div>
 <header>
-	<h2>
-		Reviews for <%= link_to @movie.title, @movie %>
-	</h2>
+	<div class="title-header">
+		Reviews for <br /><%= link_to @movie.title, @movie, class: "title-link" %>
+	</div>
 </header>
 
-<ol>
-	<% @reviews.each do |review| %>
-	<li>
-		<h3><%= profile_image_for(review.user, size: 30) %> <%= link_to(review.user.name, user_path(review.user.username)) %> -
-		 <%= review.location %>
-		</h3>
-		<h3>
-			<%= pluralize(review.stars, "Star") %>
-			<h3>
-		<p>
+<% @reviews.each do |review| %>
+<article class="reviews">
+	<div class="reviews-container">
+		<div class="review-profile-image-container">
+			<%= profile_image_for(review.user, size: 50) %>
+		</div>
+		<div class="review-user-link-container">
+			<%= link_to review.user.name, user_path(review.user.username), class: "review-user-link" %>
+		</div>
+		<div class="review-rating-container">
+			<p>Star Rating:</p>
+			<% review.stars.times do %>
+				<%= image_tag("rating_icon.png", alt: "*", class: "rating-icon") %>
+			<% end %>
+		</div>
+		<div class="review-comment-container">
 			<%= review.comment %>
-		</p>
-	</li>
-	<% end %>
-</ol>
+		</div>
+	</div>
+</article>
+<% end %>
+<% if @reviews.empty? %>
+<div class="no-reviews">There are no reviews.</div>
+<% end %>

@@ -1,48 +1,55 @@
-<br>
+<div class="clear"></div>
 <article class="movie">
 <% if @movies.empty? %>	
-	<h2>Sorry no matches.</h2>
+	<div class="no-matches">Sorry no matches.</div>
 <%else %>
-	<% @movies.each do |movie| %> 
-		<header>
-			<%= image_for(movie) %>
-		<h2><%= link_to(movie.title, movie) %></h2>
-	</header>
-		<table>
-			<tr>
-				<th>Rated: </th>
-				<td><%= movie.rating %></td>
-			</tr>
-			<tr>
-				<th>Release Date: </th>
-				<td><%= movie.released_on.to_s(:release_date) %> (<%= time_ago_in_words(movie.released_on) %> ago) (USA)<td>
-			</tr>
-			<tr>
-				<th>Worldwide Gross: </th>
-				<td><%= format_total_gross(movie) %></td>
-			</tr>
-			<th>Cast</th>
-				<td><%= movie.cast %></td>
-			</tr>
-			<tr>
-				<th>Director</th>
-				<td><%= movie.director %></td>
-			</tr>
-			<tr>
-				<th>Duration</th>
-				<td><%= movie.duration %></td>
-			</tr>
-			<tr>
-				<th>Average Star Rating</th>
-				<td>
-					<%= format_average_stars(movie) %>
-					<%= classic(movie) %>
-				</td>
-			</tr>
-		</table>
-		<p>
-		<%= truncate(movie.description, length: 43, separator: " ") %> (<%= link_to("continued", movie) %>)
-		</p>
+	<% @movies.each do |movie| %>
+	<div class="movie-container">
+		<%= link_to image_for(movie), movie %>
+		<div class="index-movie-title">
+			<p>
+				<%= movie.title %>
+			</p>
+		</div>
+		<ul>
+			<li>
+				<strong>Rated:</strong> <%= movie.rating %>
+			</li>
+			<li>
+				<strong>Release Date:</strong> <%= movie.released_on.to_s(:release_date) %> (<%= time_ago_in_words(movie.released_on) %> ago) (USA)
+			</li>
+			<li>
+				<strong>Worldwide Gross:</strong> <%= format_total_gross(movie) %>
+			</li>
+			<li>
+			<strong>Cast:</strong> <%= movie.cast %>
+			</li>
+			<li>
+				<strong>Director:</strong> <%= movie.director %>
+			</li>
+			<li>
+				<strong>Duration:</strong> <%= movie.duration %>
+			</li>
+			<li>
+				<strong>Average Star Rating:</strong>
+				<br />
+				<% review_rating = format_average_stars(movie) %>
+				<% if ratings_exist(review_rating) %>
+					<% review_rating.times do %>
+						<%= image_tag("rating_icon.png", alt: "*", class: "rating-icon") %>
+					<% end %>
+				<% else %>
+					<br />
+					<%= review_rating %>
+				<% end %>	
+			</li>
+			<li>
+				<%= classic(movie) %>
+			</li>
+		</ul>
+		<%= link_to image_tag("more_info_btn.png", class: "more-info-btn"), movie %>
+	</div>
+	<div id="movie-index-spacing"></div>
 	<% end %>
 <% end %>
 </article>

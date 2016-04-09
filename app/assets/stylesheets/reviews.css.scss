@@ -1,3 +1,72 @@
 // Place all the styles related to the Reviews controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "colors", "borders";
+
+
+.no-reviews {
+	height: 310px;
+	margin-top: 50px;
+	font-family: Arial;
+	font-size: 30px;
+	text-align: center;
+}
+
+article.reviews {
+
+	.reviews-container {
+		background: url("review_bg.png") no-repeat;
+		margin: 20px auto 40px;
+		max-width: 500px;
+		width: 100%;
+		border-radius: $secondary-bg-radius;
+
+		.review-profile-image-container {
+			text-align: center;
+
+			.review-profile-image {
+				position: relative;
+				top: 10px;
+				border: 1px solid #787878;
+			}
+		}
+
+		.review-user-link-container {
+			text-align: center;
+
+			.review-user-link {
+				position: relative;
+				top: 15px;
+				font-family: Verdana, Arial, Sans-serif;
+				font-size: 16px;
+				color: $tertiary-text-color;
+				text-decoration: none;
+			}
+
+			.review-user-link:hover {
+				color: $secondary-text-color;
+			}
+		}
+
+		.review-rating-container {
+			text-align: center;
+			margin-top: 30px;
+
+			p {
+				padding-top: 10px;
+				color: $primary-text-color;
+				font-family: Verdana, Arial, Sans-serif;
+				font-size: 18px;
+			}
+		}
+
+		.review-comment-container {
+			padding: 50px 0;
+			font-family: Verdana, Arial, Sans-serif;
+			font-size: 16px;
+			color: $primary-text-color;
+			text-align: center;
+		}
+	}
+}

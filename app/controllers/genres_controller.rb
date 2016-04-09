@@ -10,7 +10,7 @@ class GenresController < ApplicationController
 	def create
 		@genre = Genre.new(genre_params)
 		if @genre.save
-			redirect_to root_url, notice: "New genre added!"
+			redirect_to genres_url, notice: "New genre added!"
 		else
 			render :new
 		end
@@ -21,7 +21,7 @@ class GenresController < ApplicationController
 
 	def update
 		if @genre.update(genre_params)
-			redirect_to root_url, notice: "Genre successfully updated!"
+			redirect_to genres_url, notice: "Genre successfully updated!"
 		else
 			render :edit
 		end

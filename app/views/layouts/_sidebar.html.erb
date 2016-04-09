@@ -1,40 +1,39 @@
+<div class="clear"></div>
 <aside id="sidebar">
-		<nav>
-		<p>
-			<ul>
+		<ul>
+			<li>
+			<%= link_to "All Movies", movies_path, class: "sidebar-text" %>
+			</li>
+			<li>
+				<%= link_to "Upcoming", filtered_movies_path(:upcoming), class: "sidebar-text" %>
+			</li>
+			<li>
+				<%= link_to "Recent", filtered_movies_path(:recent), class: "sidebar-text" %>
+			</li>
+			<li>
+				<%= link_to "Flops", filtered_movies_path(:flops), class: "sidebar-text" %>
+			</li>
+			<li>
+				<%= link_to "Hits", filtered_movies_path(:hits), class: "sidebar-text" %>
+			</li>
+			<li>
+			<%= link_to "All Genres", genres_path, class: "sidebar-text" %>
+			</li>
+			<% if current_user_admin? %>
+				<% if controller_path == "movies" %>
 				<li>
-				<%= link_to "All Movies", movies_path %>
+				<%= link_to "Add New Movie", new_movie_path, class: "sidebar-text" %>
 				</li>
-				<li>
-					<%= link_to "Upcoming", filtered_movies_path(:upcoming) %>
-				</li>
-				<li>
-					<%= link_to "Recent", filtered_movies_path(:recent) %>
-				</li>
-				<li>
-					<%= link_to "Flops", filtered_movies_path(:flops) %>
-				</li>
-				<li>
-					<%= link_to "Hits", filtered_movies_path(:hits) %>
-				</li>
-				<br />
-				<li>
-				<%= link_to "All Genres", genres_path %>
-				</li>
-				<% if current_user_admin? %>
-					<% if controller_path == "movies" %>
-					<li>
-					<%= link_to "Add New Movie", new_movie_path %>
-					</li>
-					<% end %>
-					<% if controller_path == "genres" %>
-					<li>
-						<%= link_to "Add New Genre", new_genre_path %>
-					</li>
-					<% end %>
 				<% end %>
-			</ul>
-		</p>
-	</nav>
-	<%= content_for(:side) %>
+				<% if controller_path == "genres" %>
+				<li>
+					<%= link_to "Add New Genre", new_genre_path, class: "sidebar-text" %>
+				</li>
+				<% end %>
+				<li>
+					<%= link_to "All Users", users_path, class: "sidebar-text" %>
+				</li>
+			<% end %>
+		</ul>
+		<%= content_for(:side) %>
 	</aside>

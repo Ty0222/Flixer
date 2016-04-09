@@ -19,17 +19,17 @@ describe "Creating A New Movie" do
 			expect(current_path).to eq(new_movie_path)
 			expect(find_field("Title").value).to eq(nil)
 
-			fill_in "Title", with: "The Amazing Spider-Man"
+			fill_in "movie[title]", with: "The Amazing Spider-Man"
 			select "R", from: "movie_rating"
-			fill_in "Worldwide Gross", with: "100000000"
-			fill_in "Description", with: "A 'bad ass' movie bound to give you many laughs"
+			fill_in "movie[total_gross]", with: "100000000"
+			fill_in "movie[description]", with: "A 'bad ass' movie bound to give you many laughs"
 			select "2015", from: "movie_released_on_1i"
 			select "July", from: "movie_released_on_2i"
 			select "1", from: "movie_released_on_3i"
-			fill_in "Cast", with: "Ryan Reynolds"
-			fill_in "Director", with: "Tim Miller"
-			fill_in "Duration", with: "123 min"
-			attach_file "Image", "#{Rails.root}/app/assets/images/spiderman.jpg"
+			fill_in "movie[cast]", with: "Ryan Reynolds"
+			fill_in "movie[director]", with: "Tim Miller"
+			fill_in "movie[duration]", with: "123 min"
+			attach_file "movie[image]", "#{Rails.root}/app/assets/images/spiderman.jpg"
 			check(@genre1.name)
 			check(@genre2.name)
 

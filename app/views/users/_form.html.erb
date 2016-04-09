@@ -1,33 +1,33 @@
+<div class="clear"></div>
 <%= form_for(@user) do |f| %>
-<%= render "shared/errors", object: @user %>
-<p>
-  <%= f.label :name, "Full Name" %><br>
-  <%= f.text_field :name, size: 40, autofocus: true %>
-</p>
-<p>
-	<%= f.label :username, "Username" %><br>
-	<%= f.text_field :username, size: 40,
-	 								 placeholder: "Alphanumeric characters only!"%>
-</p>
-<p>
-	<%= f.label :email, "Email" %><br>
-	<%= f.email_field :email, size: 40 %>
-</p>
-<p>
-	<%= f.label :password, "Password" %><br>
-	<%= f.password_field :password, size: 40 %>
-</p>
-<p>
-	<%= f.label :password_confirmation, "Confirm Password" %><br>
-	<%= f.password_field :password_confirmation, size: 40 %>
-</p>
-<p>
-	<% if @user.new_record? %>
-		<%= f.submit "Create Account", :disable_with => "Creating..." %>
-		<%= link_to "Cancel", root_path %>
-	<% else %>
-		<%= f.submit "Update Account", :disable_with => "Updating..." %>
-		<%= link_to "Cancel", user_path(@user.username) %>
-	<% end %>
-</p>
+<article class="form">
+	<%= render "shared/errors", object: @user %>
+	<div class="form-container">	
+		<div class="field-area-container">
+		  <%= f.text_field :name, size: 40, autofocus: true, placeholder: "Full Name", class: "field-area" %>
+		</div>
+		<div class="field-area-container">
+			<%= f.text_field :username, size: 40,
+			 								 placeholder: "Alphanumeric username only!", class: "field-area" %>
+		</div>
+		<div class="field-area-container">
+			<%= f.email_field :email, size: 40, placeholder: "Email", class: "field-area" %>
+		</div>
+		<div class="field-area-container">
+			<%= f.password_field :password, size: 40, placeholder: "Password", class: "field-area" %>
+		</div>
+		<div class="field-area-container">
+			<%= f.password_field :password_confirmation, size: 40, placeholder: "Confirm Password", class: "field-area" %>
+		</div>
+		<div class="submit-cancel-container">
+			<% if @user.new_record? %>
+				<%= f.submit "Create Account", class: "submit-btn" %>
+				<%= link_to "Cancel", root_path, class: "cancel-link" %>
+			<% else %>
+				<%= f.submit "Update Account", class: "submit-btn" %>
+				<%= link_to "Cancel", user_path(@user.username), class: "cancel-link" %>
+			<% end %>
+		</div>
+	</div>
+</article>
 <% end %>

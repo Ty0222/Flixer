@@ -1,5 +1,3 @@
-#app/views/users/show.html.erb
-
 describe "Viewing An Individual User Account" do
 	
 	it "shows a user's details" do
@@ -15,9 +13,7 @@ describe "Viewing An Individual User Account" do
 
 		expect(current_path).to eq(user_path(user))
 		expect(page).to have_content(user.username)
-		expect(page).to have_content(user.email)
 		expect(page).to have_link(review.movie.title)
-		expect(page).to have_content("3 Stars")
 		expect(page).to have_content("About 1 month ago")
 		expect(page).to have_content(review.comment)
 	end

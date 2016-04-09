@@ -1,5 +1,3 @@
-#app/views/users/new.html.erb & #app/views/show.html.erb
-
 describe "Signing In" do
 	
 	it "prompts for an email/username and password" do
@@ -9,8 +7,8 @@ describe "Signing In" do
 
 		expect(current_path).to eq(new_session_path)
 
-		expect(page).to have_field("Email")
-		expect(page).to have_field("Password")
+		expect(page).to have_field("email")
+		expect(page).to have_field("password")
 		expect(page).not_to have_link("Log Out")
 	end 
 
@@ -21,8 +19,8 @@ describe "Signing In" do
 
 		click_link "Log In"
 
-		fill_in "Email", with: user.email
-		fill_in "Password", with: user.password
+		fill_in "email", with: user.email
+		fill_in "password", with: user.password
 
 		click_button "Log In"
 
@@ -42,12 +40,12 @@ describe "Signing In" do
 
 		click_link "Log In"
 
-		fill_in "Email", with: "sandersbob@example.com"
-		fill_in "Password", with: "lunch"
+		fill_in "email", with: "sandersbob@example.com"
+		fill_in "password", with: "lunch"
 		
 		click_button "Log In"
 
-		expect(page).to have_field("Password")
+		expect(page).to have_field("password")
 		expect(page).to have_content("Invalid email/username and/or password combination!")
 	end
 
