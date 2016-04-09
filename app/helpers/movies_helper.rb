@@ -14,7 +14,7 @@ module MoviesHelper
 			elsif options[:type] && options[:type] == :med
 				image_tag(movie.image.url(:med))
 			else
-				image_tag(movie.image.url(:default))
+				image_tag("#{movie.image.url(:default)}")
 			end 
 		else
 			image_tag("placeholder.png")
