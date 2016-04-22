@@ -17,3 +17,6 @@
 
 #Ignore all files created by public/system directory
 /public/system
+
+#Ignore environment configuration files
+.env
