@@ -11,7 +11,7 @@ User.create!({
 	username: "Admin0222",
 	email: "kellytyquan@realitiy.com",
 	password: "secret",
-	password: "secret",
+	password_confirmation: "secret",
 	admin: true
 	})
 
