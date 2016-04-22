@@ -6,9 +6,11 @@ class Movie < ActiveRecord::Base
 	has_many :fans, through: :favorites, source: :user
 	has_many :characterizations, dependent: :destroy, foreign_key: "movie_slug"
 	has_many :genres, through: :characterizations
-	has_attached_file :image, styles: {
-		default: "350x500>", med: "130x200", small: "49x75>"
-	}
+	has_attached_file :image, 
+										styles: {
+															default: "350x500>",
+															med: "130x200>",
+															small: "49x75>" }
 	
 	before_validation :generate_slug
 
