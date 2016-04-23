@@ -59,11 +59,21 @@ header#page-header {
 
 aside#sidebar {
 	float:right;
-	margin-top: 80px;
+	margin-top: 110px;
 	margin-right: -6px;
 	width: 260px;
 
+	.side-menu-icon {
+		z-index: 98;
+		position: fixed;
+		max-width: 60px;
+		width: 100%;
+		right: 0;
+		top: 66px;
+	}
+
 	ul {
+		display: none;
 		z-index: 98;
 		position: fixed;
 		padding: 0;
