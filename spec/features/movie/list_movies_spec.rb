@@ -33,7 +33,7 @@ describe "Listing Of Movies" do
   	expect(page).to have_content(movie1.rating)
   	expect(page).to have_content("$623,933,331.00")
   	expect(page).to have_content("May 2nd, 2008")
-    expect(page).to have_selector("img[src$='#{movie1.image.url(:default)}']")
+    expect(page).to have_selector("img[src$='#{movie1.image.url(:original)}']")
   end
 
 	it "lists only movies already released to public (USA)" do

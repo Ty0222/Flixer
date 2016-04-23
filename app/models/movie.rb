@@ -8,7 +8,7 @@ class Movie < ActiveRecord::Base
 	has_many :genres, through: :characterizations
 	has_attached_file :image, 
 										styles: {
-															default: "350x500>",
+															original: "350x500>",
 															med: "130x200>",
 															small: "49x75>" }
 	
