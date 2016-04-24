@@ -1,8 +1,8 @@
 development:
-  access_key_id: "AKIAJJLDFN6YFWFRKOSQ"
-  secret_access_key: "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"
-  bucket: "staggedflixer"
-  region: "us-east-1"
+  access_key_id: AKIAJ77YXWKIX2IJ5ZFA
+  secret_access_key: 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
+  bucket: staggedflixer
+  region: us-east-1
 
 production:
   access_key_id: <%= ENV["AWS_ACCESS_KEY_ID"] %>
