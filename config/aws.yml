@@ -1,8 +1,8 @@
 development:
-  access_key_id: AKIAJ77YXWKIX2IJ5ZFA
-  secret_access_key: 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
-  bucket: staggedflixer
-  region: us-east-1
+  access_key_id: <%= ENV["AWS_ACCESS_KEY_ID"] %>
+  secret_access_key: <%= ENV["AWS_SECRET_ACCESS_KEY"] %>
+  bucket: <%= ENV["AWS_BUCKET"] %>
+  region: <%= ENV["AWS_REGION"] %>
 
 production:
   access_key_id: <%= ENV["AWS_ACCESS_KEY_ID"] %>
