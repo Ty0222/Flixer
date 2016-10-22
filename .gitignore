@@ -15,8 +15,12 @@
 /log/*.log
 /tmp
 
-#Ignore all files created by public/system directory
+#Ignore all files created by public/system directory.
 /public/system
 
-#Ignore environment configuration files
+#Ignore environment configuration files.
 .env
+config/initializers/dev_env.rb
+
+# Ignore DS_Store files.
+.DS_Store
