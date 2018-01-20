@@ -116,7 +116,7 @@ RSpec.describe MovieDecorator do
 
     context "when a movie has been voted on" do  
       it "returns an average number of stars via an HTML image based on a movie's vote rating" do
-        movie = double(vote_rating: 7)
+        movie = Movie.new(vote_rating: 7)
         view_context = double
         allow(view_context).to receive(:image_tag).with(any_args).and_return("*")
         decorator = MovieDecorator.decorate(movie)
@@ -127,7 +127,7 @@ RSpec.describe MovieDecorator do
 
     context "when a movie has not been voted on" do  
       it "returns an HTML element with the text 'No rating'" do
-        movie = double(vote_rating: 0)
+        movie = Movie.new(vote_rating: 0)
         decorator = MovieDecorator.decorate(movie)
 
         expect(decorator.star_rating(view_context)).to include("No rating")
