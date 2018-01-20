@@ -31,13 +31,10 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 
-gem 'paperclip', '~> 4.3'
-
-gem 'aws-sdk', '< 2.0'
-
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem "httparty"
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -50,10 +47,12 @@ gem 'bcrypt', '~> 3.1.7'
 
 group :test, :development do
   gem "minitest"
-  gem "rspec-rails", "2.14.0"
+  gem "rspec-rails", "3.5.0"
 end
 
 group :test do
-  gem "capybara", "2.1.0"  
+  gem "capybara", "2.4.0"
+  gem "capybara-email", "2.5.0"
+  gem "email_spec" 
 end
 
