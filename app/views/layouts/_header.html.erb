@@ -1,13 +1,13 @@
 <div class="layout__head">
 	<div class="navigation">
 		<div class="flixer-logo">
-			<%= link_to image_tag("flixer_logo.png", class: "flixer-logo__image"), movies_url(page: 1) %> 
+			<%= link_to image_tag("flixer_logo.png", class: "flixer-logo__image"), get_movies_url(movies_metadata) %> 
 		</div>
 		<div class="menu-content">
 			<div class="menu-content__listing-title" id="m-c__listing-title">In Theaters</div>
 			<%= link_to "Genres", genres_url, class: "menu-content__genre-title" %>
 			<ul class="menu-content__listing-options">
-				<li><%= link_to "All", movies_url %></li>
+				<li><%= link_to "All", get_movies_url(movies_metadata) %></li>
 				<li><%= link_to "Hits Only", get_hit_movies_url(movies_metadata) %></li>
 			</ul>
 		</div>
