@@ -1,20 +1,14 @@
-describe "Listing Genres" do
+require "rails_helper"
 
-	before do
-		@genre1 = Genre.create(name: "Genre 1")
-		@genre2 = Genre.create(name: "Genre 2")
-		@genre3 = Genre.create(name: "Genre 3")
-		@user = User.create(user_attributes)
-		login(@user)
-		visit genres_url
-	end
+RSpec.feature "Listing genres" do
 	
-	it "shows all genres" do
-		
-		expect(page).to have_link(@genre1.name)
-		expect(page).to have_link(@genre2.name)
-		expect(page).to have_link(@genre3.name)
-		expect(page).to have_link("Edit")
+	it "displays a collection of genres" do
+		Genre.genre_list_source = -> {[genre_list_data, genre_list_data(name: "Adventure")]}
+
+		visit genres_url
+
+		expect(page).to have_link("Action")
+		expect(page).to have_link("Adventure")
 	end
 
 end
