@@ -1,65 +1,97 @@
-class Movie < ActiveRecord::Base
-	self.primary_key = "slug"
+class Movie
+	include ActiveModelNaming
+	include DataAccess::Builder
 
-	has_many :reviews, -> { order(created_at: :desc) }, dependent: :destroy, foreign_key: "movie_slug"
-	has_many :favorites, dependent: :destroy, foreign_key: "movie_slug"
-	has_many :fans, through: :favorites, source: :user
-	has_many :characterizations, dependent: :destroy, foreign_key: "movie_slug"
-	has_many :genres, through: :characterizations
-	has_attached_file :image, 
-										styles: {
-															original: "350x500>",
-															med: "130x200>",
-															small: "49x75>" }
-	
-	before_validation :generate_slug
+	attr_reader :id, :title, :image, :released_on, :vote_rating, :total_votes, :overview, :revenue, :duration, :background_poster,
+	 :genres, :genre_ids
 
-	validates_attachment :image, :content_type => {
-			:content_type => ['image/jpeg', 'image/png'] },
-			:size => { :less_than => 1.megabyte }
-	validates :title, presence: true, uniqueness: true
-	validates :released_on, :duration, presence: true
-	validates :description, length: { minimum: 25 }
-	validates :total_gross, numericality: { greater_than_or_equal_to: 0 }
-	RATINGS = %w[G PG PG-13 R NC-17]
-	validates :rating, inclusion: { in: RATINGS }
-	validates :slug, uniqueness: true
+	movie_list_mappings = { 
+		id: "id", title: "title", image: "poster_path", released_on: "release_date", vote_rating: "vote_average", total_votes: "vote_count",
+		 overview: "overview", genre_ids: "genre_ids" 
+	}
 
-	scope :all_from_genre, ->(genre) { joins(:genres).where("genres.name = ?", "#{genre.name}") }
-	scope :released_movies, -> { where("released_on <= ?", Time.now).order(released_on: :desc) }
-	scope :rated, ->(rating) { released_movies.where("rating = ?", rating) }
-	scope :upcoming, -> { where("released_on > ?", Time.now) }
-	scope :recent, -> (limit=3) { released_movies.limit(limit) }
-	scope :flops, -> { released_movies.where("total_gross < ?", 50000000.0) }
-	scope :hits, -> { released_movies.where("total_gross >= ?", 400000000.0) }
+	movie_mappings = {
+		revenue: "revenue", duration: "runtime", background_poster: "backdrop_path", genres: "genres"
+	}.merge(movie_list_mappings)
 
 
-	def self.to_param
-		slug
+	builds_object :movie_list, mappings: movie_list_mappings
+	builds_object :movie, mappings: movie_mappings
+
+	# Class methods
+
+	def self.now_playing(page: 1, hit_status: false)
+		build_movie_list_with movie_list_source.call page: page, hit_status: hit_status
 	end
 
-	def generate_slug
-		self.slug ||= title.parameterize if title		
+	def self.now_playing_by_genre(page: 1, hit_status: false, with_genres:)
+		build_movie_list_with filtered_movie_list_source.call page: page, hit_status: hit_status, with_genres: with_genres
 	end
 
-	def flop?
-		if total_gross.blank? || total_gross < 50000000.0 && reviews.size < 51 && reviews.average(:stars).to_i.round < 4
-			true
-		else
-			false
+	def self.movie_list_metadata(page: 1, hit_status: false)
+		OpenStruct.new movie_list_metadata_source.call page: page, hit_status: hit_status
+	end
+
+	def self.filtered_movie_list_metadata(page: 1, hit_status: false, with_genres:)
+		OpenStruct.new filtered_movie_list_metadata_source.call page: page, hit_status: hit_status, with_genres: with_genres
+	end
+
+	def self.get_movie(id:)
+		build_movie_with movie_fetcher.call id: id
+	end
+
+	# Instance methods
+
+	def hit_movie?
+		vote_rating >= 7 && total_votes >= 100
+	end
+
+	def vote_rating
+    return nil if @vote_rating.round == 0
+    @vote_rating.round
+  end
+
+
+	private
+
+		def self.movie_list_source
+			@movie_list_source ||= MovieAdapter.singleton_method(:filter_by)
 		end
-	end
 
-	def average_stars
-		reviews.average(:stars)
-	end
+		def self.movie_list_source=(source)
+			@movie_list_source = source
+		end
 
-	def classic?
-		reviews.size > 50 && reviews.average(:stars).to_i.round >= 4		
-	end
+		def self.movie_list_metadata_source
+			@movie_list_metadata_source ||= MovieAdapter.singleton_method(:filter_metadata_by)
+		end
 
-	def exist?
-		is_a? Integer
-	end
+		def self.movie_list_metadata_source=(source)
+			@movie_list_metadata_source = source
+		end
+
+		def self.filtered_movie_list_source
+			@filtered_movie_list_source ||= MovieAdapter.singleton_method(:filter_by)
+		end
+
+		def self.filtered_movie_list_source=(source)
+			@filtered_movie_list_source = source
+		end
+
+		def self.filtered_movie_list_metadata_source
+			@filtered_movie_list_metadata_source ||= MovieAdapter.singleton_method(:filter_metadata_by)
+		end
+
+		def self.filtered_movie_list_metadata_source=(source)
+			@filtered_movie_list_metadata_source = source
+		end
+
+		def self.movie_fetcher
+			@movie_fetcher ||= MovieAdapter.singleton_method(:get_movie)
+		end
+
+		def self.movie_fetcher=(fetcher)
+			@movie_fetcher = fetcher
+		end
 
 end

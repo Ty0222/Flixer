@@ -1,284 +1,174 @@
-describe "#flop?" do
-  
-	it "is a flop when movie total gross is less than 50M" do
-	  movie = Movie.new(total_gross: 40000000.0)
-    movie.reviews.new(review_attributes(stars: 3))
-    movie.reviews.new(review_attributes(stars: 3))
-    movie.reviews.new(review_attributes(stars: 3))
-    movie.reviews.new(review_attributes(stars: 3))
-    movie.reviews.new(review_attributes(stars: 3))
-    movie.reviews.new(review_attributes(stars: 2))
-    movie.reviews.new(review_attributes(stars: 2))
-    movie.reviews.new(review_attributes(stars: 2))
-    movie.reviews.new(review_attributes(stars: 2))
-    
-    expect(movie.flop?).to eq(true)
-	end
+require_relative "interfaces/data_access_builder_interface"
+require "rails_helper"
 
-	it "is not a flop when movie total gross is greater than 50M" do
-    movie = Movie.new(total_gross: 60000000.0)
-  
-    expect(movie.flop?).to eq(false)
+RSpec.describe Movie do
+
+  it "responds to .now_playing" do
+    expect(described_class.respond_to?(:now_playing)).to eq(true)
   end
 
-	it "is a flop when movie total gross is blank" do
-    movie = Movie.new(total_gross: nil)
-  
-    expect(movie.flop?).to eq(true)
-	end
-end
-
-describe "#released_movies" do
-  
-  it "includes movie(s) when release date date is not beyond today" do
-    movie1 = Movie.create(movie_attributes)
-    movie2 = Movie.create(movie_attributes(title: "Deadpool", released_on: (Time.now).to_s))
-    
-    expect(Movie.released_movies).to include(movie1)
-    expect(Movie.released_movies).to include(movie2)
+  it "responds to .now_playing_by_genre" do
+    expect(described_class.respond_to?(:now_playing_by_genre)).to eq(true)
   end
+
+  it "responds to .get_movie" do
+    expect(described_class.respond_to?(:get_movie)).to eq(true)
+  end
+
+  it "responds to .movie_list_metadata" do
+    expect(described_class.respond_to?(:movie_list_metadata)).to eq(true)
+  end
+
+  describe ".now_playing" do
+
+    it "returns a collection of movie objects" do
+      movie_list_collection = [{id: 1}, {id: 2}]
+      Movie.movie_list_source = ->(page) {movie_list_collection}
       
-  it "does not include movie when 'released_on:' date is beyond today" do
-    movie = Movie.create(movie_attributes(released_on: (Date.today+2).to_s))
-  
-    expect(Movie.released_movies).to_not include(movie)
+      result = Movie.now_playing
+
+      expect(result).to be_a(Array)
+      expect(result.first).to be_a(Movie)
+      expect(result.first).to have_attributes(id: 1)
+      expect(result.last).to have_attributes(id: 2)
+    end
+# TODO: copy spec below to other applicable methods
+    context "when its 'hit_status' parameter is set to true" do  
+      it "only returns a collection of movie objects with total votes above 100 and an above 7 vote rating" do
+        movie_list_collection = [{id: 1, vote_average: 7, vote_count: 100}]
+        Movie.movie_list_source = ->(page) {movie_list_collection}
+        
+        result = Movie.now_playing(hit_status: true)
+
+        expect(result).to be_a(Array)
+        expect(result.first).to be_a(Movie)
+        expect(result.first).to have_attributes(id: 1)
+      end
+    end
   end
+
+  describe ".now_playing_by_genre" do
+
+    it "returns a collection of movie objects based on a given genre" do
+      filtered_movie_list_collection = [ {id: 1, genre_ids: [8, 11]}, {id: 2, genre_ids: [13, 44]} ]
+      Movie.filtered_movie_list_source = ->(with_genres) {filtered_movie_list_collection}
       
-  it "returns movies in descending order (from most recent)" do
-    movie1 = Movie.create(movie_attributes(released_on: Date.today-3))      
-    movie2 = Movie.create(movie_attributes(title: "Deadpool", released_on: Date.today-2))      
-    movie3 = Movie.create(movie_attributes(title: "Peter Pan", released_on: Date.today-1))      
-  
-    expect(Movie.released_movies).to eq([movie3, movie2, movie1])
-  end
-end
+      result = Movie.now_playing_by_genre(with_genres: [8, 13])
 
-describe "A Movie" do
-  
-  it "requires a title" do
-    movie = Movie.new(movie_attributes(title: ""))
-
-    movie.valid?
-
-    expect(movie.errors[:title].any?).to eq(true)
-  end
-
-  it "requires a rating" do
-    movie = Movie.new(movie_attributes(rating: ""))
-
-    movie.valid?
-
-    expect(movie.errors[:rating].any?).to eq(true)
-  end
-
-  it "requires a description" do
-    movie = Movie.new(movie_attributes(description: ""))
-
-    movie.valid?
-
-    expect(movie.errors[:description].any?).to eq(true)
-  end
-
-  it "requires a duration" do
-    movie = Movie.new(movie_attributes(duration: ""))
-
-    movie.valid?
-
-    expect(movie.errors[:duration].any?).to eq(true)
-  end
-
-  it "requires a description to be longer than 24 characters" do
-    movie = Movie.new(movie_attributes(description: "X" * 24))
-
-    movie.valid?
-
-    expect(movie.errors[:description].any?).to eq(true)
-  end
-
-  it "accepts a total gross of 0" do
-    movie = Movie.new(movie_attributes(total_gross: 0.00))
-
-    movie.valid?
-
-    expect(movie.errors[:total_gross].any?).to eq(false)
-  end
-  
-  it "accepts a positive total gross" do
-      movie = Movie.new(movie_attributes(total_gross: 1.00))
-
-      movie.valid?
-
-      expect(movie.errors[:total_gross].any?).to eq(false)
-    end
-
-  it "rejects a negative total gross" do
-    movie = Movie.new(movie_attributes(total_gross: -24.0))
-
-    movie.valid?
-
-    expect(movie.errors[:total_gross].any?).to eq(true)
-  end
-  
-  it "accepts any ratings on the approved list" do
-    ratings = %w[G PG PG-13 R NC-17]
-
-    ratings.each do |rating|
-      movie = Movie.new(movie_attributes(rating: rating))
-
-      movie.valid?
-
-      expect(movie.errors[:rating].any?).to eq(false)
-    end
-  end
-  
-  it "rejects any ratings not on allowed list" do
-    ratings = %w[R-18 F R0 P2 Help]
-
-    ratings.each do |rating|
-      movie = Movie.new(movie_attributes(rating: rating))
-
-      movie.valid?
-
-      expect(movie.errors[:rating].any?).to eq(true)
+      expect(result).to be_a(Array)
+      expect(result.first).to be_a(Movie)
+      expect(result.first).to have_attributes(id: 1)
+      expect(result.last).to have_attributes(id: 2)
+      expect(result.last.genre_ids).to contain_exactly(13, 44)
     end
   end
 
-  it "accepts valid entry of data" do
-    movie = Movie.new(movie_attributes)
+  describe ".get_movie" do
 
-    expect(movie.valid?).to eq(true)
-  end  
-
-  it "has many reviews" do
-    movie = Movie.new(movie_attributes)
-    user1 = User.create(user_attributes)
-    user2 = User.create(user_attributes(name: "Sam Kelly"))
-
-    review1 = movie.reviews.new(review_attributes)
-    review1.user = user1
-
-    review2 = movie.reviews.new(review_attributes)
-    review2.user = user2
-
-    expect(movie.reviews).to include(review1)
-    expect(movie.reviews).to include(review2)
-  end
-
-  it "deletes all of movie's associated reviews" do
-    movie = Movie.create(movie_attributes)
-    user1 = User.create(user_attributes)
-    user2 = User.create(user_attributes(name: "Sam Kelly"))
-
-    review1 = movie.reviews.new(review_attributes)
-    review1.user = user1
-    review1.save!
-
-    review2 = movie.reviews.new(review_attributes)
-    review2.user = user2
-    review2.save!
-
-    expect {
-      movie.destroy
-      }.to change(Review, :count).by(-2) 
-  end
-
-  it "calculates the average number of stars" do
-    movie = Movie.create(movie_attributes)
-
-    movie.reviews.create(review_attributes(stars: 1))
-    movie.reviews.create(review_attributes(stars: 3))
-
-    expect(movie.average_stars).to eq(2)
-  end
-
-  it "auto-generates a slug when created" do
-    movie = Movie.create(movie_attributes(title: "X-Men: The Last Stand"))
-
-    expect(movie.slug).to eq("x-men-the-last-stand")
-  end
-
-  it "requires a unique title" do
-    movie1 = Movie.create(movie_attributes)
-    movie2 = Movie.new(movie_attributes)
-
-    movie2.valid?
-
-    expect(movie2.errors[:title].first).to eq("has already been taken")
-  end
-
-  it "requires a unique slug" do
-    movie1 = Movie.create(movie_attributes)
-    movie2 = Movie.new(movie_attributes(slug: movie1.slug))
-
-    movie2.valid?    
-
-    expect(movie2.errors[:slug].first).to eq("has already been taken")
-  end
-
-  it "has many fans" do
-    movie = Movie.new(movie_attributes)
-    fan1 = User.new(user_attributes)
-    fan2 = User.new(user_attributes(email: "sam@example.com"))
-
-    movie.favorites.new(user: fan1)
-    movie.favorites.new(user: fan2)
-
-    expect(movie.fans).to include(fan1)
-    expect(movie.fans).to include(fan2)
-  end
-
-  context "upcoming scope" do
-    it "returns the movies with a released on date in the future" do
-      movie1 = Movie.create!(movie_attributes(released_on: 3.months.ago))
-      movie2 = Movie.create!(movie_attributes(title: "Deadpool", released_on: 3.months.from_now))
-
-      expect(Movie.upcoming).to eq([movie2])
+    it "returns a movie obect" do
+      Movie.movie_fetcher = ->(id) { movie_data(id: 2) }
+      
+      result = Movie.get_movie(id: 2)
+      
+      expect(result).to be_a(Movie)
+      expect(result).to have_attributes(id: 2)
     end
   end
 
-  context "rated scope" do
-    it "returns released movies with the specified rating" do
-      movie1 = Movie.create!(movie_attributes(released_on: 3.months.ago, rating: "PG"))
-      movie2 = Movie.create!(movie_attributes(title: "Deadpool", released_on: 3.months.ago, rating: "PG-13"))
-      movie3 = Movie.create!(movie_attributes(title: "Peter Pan", released_on: 1.month.from_now, rating: "PG"))
+  describe ".movie_list_metadata" do
 
-      expect(Movie.rated("PG")).to eq([movie1])
+    it "returns an object containing metadata about list of movies" do
+      movie_metadata = {page: 1, total_pages: 10}
+      Movie.movie_list_metadata_source = ->(page) {movie_metadata}
+
+      result = Movie.movie_list_metadata
+
+      expect(result.page).to eq(1)
+      expect(result.total_pages).to eq(10)
     end
   end
 
-  context "recent scope" do
+  it "responds to #id" do
+    expect(described_class.new.respond_to?(:id)).to eq(true)
+  end
+
+  it "responds to #title" do
+    expect(described_class.new.respond_to?(:title)).to eq(true)
+  end
+
+  it "responds to #image" do
+    expect(described_class.new.respond_to?(:image)).to eq(true)
+  end
+
+  it "responds to #released_on" do
+    expect(described_class.new.respond_to?(:released_on)).to eq(true)
+  end
+
+  it "responds to #vote_rating" do
+    expect(described_class.new.respond_to?(:vote_rating)).to eq(true)
+  end
+
+  it "responds to #total_votes" do
+    expect(described_class.new.respond_to?(:total_votes)).to eq(true)
+  end
+
+  it "responds to #overview" do
+    expect(described_class.new.respond_to?(:overview)).to eq(true)
+  end
+
+  it "responds to #revenue" do
+    expect(described_class.new.respond_to?(:revenue)).to eq(true)
+  end
+
+  it "responds to #duration" do
+    expect(described_class.new.respond_to?(:duration)).to eq(true)
+  end
+
+  it "responds to #background_poster" do
+    expect(described_class.new.respond_to?(:background_poster)).to eq(true)
+  end
+
+  it "responds to #genres" do
+    expect(described_class.new.respond_to?(:genres)).to eq(true)
+  end
+
+  it "responds to #hit_movie?" do
+    expect(described_class.new.respond_to?(:hit_movie?)).to eq(true)
+  end
+
+  describe "#vote_rating" do
     
-    before do
-      @movie1 = Movie.create!(movie_attributes(released_on: 3.months.ago))
-      @movie2 = Movie.create!(movie_attributes(title: "Deadpool", released_on: 2.months.ago))
-      @movie3 = Movie.create!(movie_attributes(title: "Deadpool2", released_on: 1.month.ago))
-      @movie4 = Movie.create!(movie_attributes(title: "Deadpool3", released_on: 1.week.ago))
-      @movie5 = Movie.create!(movie_attributes(title: "Deadpool4", released_on: 1.day.ago))
-      @movie6 = Movie.create!(movie_attributes(title: "Deadpool5", released_on: 1.hour.ago))
-      @movie7 = Movie.create!(movie_attributes(title: "Deadpool6", released_on: 1.day.from_now))
-    end
+    it "rounds a given vote rating" do
+      movie = Movie.new(vote_rating: 7.3)
 
-    it "returns a specified number of released movies ordered with the most recent movie first" do
-      expect(Movie.recent(2)).to eq([@movie6, @movie5])
-    end
-
-    it "returns a default of 3 released movies ordered with the most recent movie first" do
-      expect(Movie.recent).to eq([@movie6, @movie5, @movie4])
+      expect(movie.vote_rating).to eq(7)
     end
   end
 
-  context "all_from_genre scope" do
+  describe "#hit_movie?" do
+    
+    context "when a movie's vote rating is at least a 7 and its total votes have reached 100" do  
+      it "returns true" do
+        movie = Movie.new(vote_rating: 7, total_votes: 100)
 
-    it "shows only action movies" do
-      movie1 = Movie.create(movie_attributes)
-      movie2 = Movie.create(movie_attributes(title: "Deadpool"))
+        expect(movie.hit_movie?).to eq(true)
+      end
+    end
 
-      genre = Genre.create(name: "Action")
+    context "when a movie's vote rating is below a 7" do  
+      it "returns false" do
+        movie = Movie.new(vote_rating: 6, total_votes: 100)
 
-      movie1.genres << genre
-      movie2.genres << genre
+        expect(movie.hit_movie?).to eq(false)
+      end
+    end
 
-      expect(Movie.all_from_genre(genre)).to eq([movie1, movie2])
+    context "when a movie's total votes have not reached 100" do  
+      it "returns false" do
+        movie = Movie.new(vote_rating: 7, total_votes: 99)
+
+        expect(movie.hit_movie?).to eq(false)
+      end
     end
   end
 
