@@ -1,0 +1,33 @@
+<% movies.each_with_index do |movie, idx| %>
+  <div class="movie-billboard">
+    <%= link_to movie.poster_image(self), movie_url(movie.id) %>
+
+    <div class="movie-info">
+      <div class="movie-info__title">
+        <p>
+          <%= movie.title(self) %>
+        </p>
+      </div>
+      <ul class="movie-info__other-details">
+        <li>
+          <span>Overview:</span> <br />
+          <%= movie.overview %>
+        </li>
+        <li>
+          <span>Release Date:</span> <br />
+          <%= movie.release_date %> <br />
+          <%= movie.time_since_release_date(self) %>
+        </li>
+        <li>
+          <span>Average Star Rating (1 - 10):</span> <br />
+          <%= movie.star_rating(self) %> <br />
+          <%= movie.hit_status(self) %>
+        </li>
+      </ul>
+    </div>
+
+    <%= link_to image_tag("more_info_btn.png", class: "movie-billboard__more-info-btn"), movie_url(movie.id), id: "movie-#{idx + 1}" %>
+  </div>
+
+  <div class="movie-index-spacing-bottom"></div>
+<% end %>
