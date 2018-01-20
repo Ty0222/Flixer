@@ -1,0 +1,10 @@
+<div class="movie-page-metadata">
+  <div class="movie-page-metadata__page-number">
+    Page <%= movies_metadata.page %> of <%= movies_metadata.total_pages %>
+  </div>
+  <div class="movie-page-metadata__pagination">
+    <%= movies_metadata.previous_page_link(self) %>
+    <%= movies_metadata.pagination_links(self) %>
+    <%= movies_metadata.next_page_link(self) %>
+  </div>
+</div>
