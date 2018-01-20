@@ -1,96 +1,44 @@
-<div class="clear"></div>
-<% content_for(:title, @movie.title) %>
+<% content_for(:title, @movie.title(self)) %>
+<%= @movie.background_image(self) %>
 
-<%= themed_page_bg(@movie) %>
+<div class="movie-billboard is-detailed">
+	<%= link_to @movie.poster_image(self), movie_url(@movie.id) %>
+	<div class="movie-info">
+		<div class="movie-info__title">
+			<p><%= @movie.title(self) %></p>
+  	</div>
+		<ul class="movie-info__other-details">
+      <li>
+        <span>Release Date:</span> <br />
+        <%= @movie.release_date %> <br />
+        <%= @movie.time_since_release_date(self) %>
+      </li>
+      <li>
+        <span>Revenue:</span> <br />
+        <%= @movie.revenue(self) %>
+      </li>
+      <li>
+        <span>Duration:</span> <br />
+        <%= @movie.duration %>
+      </li>
+      <li>
+        <span>Average Star Rating (1 - 10):</span> <br />
+        <%= @movie.star_rating(self) %> <br />
+        <%= @movie.hit_status(self) %>
+      </li>
+    </ul>
+  </div>
+</div>
 
-<article class="movie">
-	<div class="show-movie-title">
-		<p>
-			<%= @movie.title %>
-		</p>
-	</div>
-	<div class="movie-container">
-		<%= image_for(@movie) %>
-		<% if current_user %>
-		<div class="fav-btn-container">
-			<% if @current_favorite %>
-			<div class="fav-btn">
-				<%= link_to image_tag("fav_btn.png"), movie_favorite_path(@movie, @current_favorite), method: :delete %>
-				<div class="fav-btn-text unfav">
-					Unfavorite
-				</div>
-			</div>
-			<% else %>
-			<div class="fav-btn">
-				<%= link_to image_tag("fav_btn.png"), movie_favorites_path(@movie), method: :post %>
-				<div class="fav-btn-text fav">
-					Favorite
-				</div>
-			</div>
-			<% end %>
-			<div class="fan-size">
-				<%= pluralize(@fans.size, "Fan") %>
-			</div>
-		</div>
-		<% end %>
-		<ul>
-			<li>
-				<strong>Rated:</strong> <%= @movie.rating %>
-			</li>
-			<li>
-				<strong>Release Date:</strong> <%= @movie.released_on.to_s(:release_date) %> (<%= time_ago_in_words(@movie.released_on) %> ago) (USA)
-			</li>
-			<li>
-				<strong>Worldwide Gross:</strong> <%= format_total_gross(@movie) %>
-			</li>
-			<li>
-			<strong>Cast:</strong> <%= @movie.cast %>
-			</li>
-			<li>
-				<strong>Director:</strong> <%= @movie.director %>
-			</li>
-			<li>
-				<strong>Duration:</strong> <%= @movie.duration %>
-			</li>
-			<li>
-				<strong>Average Star Rating:</strong>
-				<br />
-				<% review_rating = format_average_stars(@movie) %>
-				<% if ratings_exist(review_rating) %>
-					<% review_rating.times do %>
-						<%= image_tag("rating_icon.png", alt: "*", class: "rating-icon") %>
-					<% end %>
-				<% else %>
-					<br />
-					<%= review_rating %>
-				<% end %>	
-			</li>
-			<li>
-				<%= classic(@movie) %>
-			</li>
-		</ul>
-	</div>
-	<div class="clear"></div>
-	<div class="review-genre-container">
-		<% @genres.each do |genre| %>
-			<%= link_to content_tag(:p, genre.name), genre_movies_path(genre), class: "genre" %>
-		<% end %>
-		<div class="review">
-			<%= link_to "Reviews", movie_reviews_path(@movie), class: "review-link" %> | <%= link_to "Write Review", new_movie_review_path(@movie), class: "review-link" %>
-		</div>
-	</div>
-	<div class="movie-description-container">
-		<div class="movie-description">
-			<%= @movie.description %>
-		</div>
-	</div>
-	<div class="edit-delete-container">
-	<% if current_user_admin? %>
-		<div class="edit-delete-links">
-				<%= link_to "Edit", edit_movie_path(@movie), class: "edit-link" %> |
-				<%= link_to "Delete", @movie, method: :delete,
-					data: {confirm: "Are you sure?"}, class: "delete-link" %>
+<div class="movie-genre">
+	<% @movie.genres.each do |genre| %>
+		<div class="movie-genre__name">
+			<%= link_to genre.name, filtered_movies_by_genre_url(genre_ids: genre.id, page: 1) %>
 		</div>
 	<% end %>
+</div>
+<div class="movie-info is-overview-only">
+	<div class="movie-info__overview">
+		<%= @movie.overview %>
 	</div>
-</article>
+</div>
