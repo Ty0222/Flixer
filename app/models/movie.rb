@@ -47,8 +47,11 @@ class Movie
 	end
 
 	def vote_rating
-    return nil if @vote_rating.round == 0
-    @vote_rating.round
+    @vote_rating.round rescue nil
+  end
+
+  def vote_rating?
+  	vote_rating.nil? || vote_rating == 0 ? false : true
   end
 
 

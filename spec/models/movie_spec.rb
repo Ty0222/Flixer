@@ -32,7 +32,7 @@ RSpec.describe Movie do
       expect(result.first).to have_attributes(id: 1)
       expect(result.last).to have_attributes(id: 2)
     end
-# TODO: copy spec below to other applicable methods
+
     context "when its 'hit_status' parameter is set to true" do  
       it "only returns a collection of movie objects with total votes above 100 and an above 7 vote rating" do
         movie_list_collection = [{id: 1, vote_average: 7, vote_count: 100}]
@@ -61,6 +61,20 @@ RSpec.describe Movie do
       expect(result.last).to have_attributes(id: 2)
       expect(result.last.genre_ids).to contain_exactly(13, 44)
     end
+
+    context "when its 'hit_status' parameter is set to true" do  
+      it "only returns a collection of movie objects with total votes above 100 and an above 7 vote rating" do
+        movie_list_collection = [{id: 1, genre_ids: [8, 11], vote_average: 7, vote_count: 100}]
+        Movie.movie_list_source = ->(page) {movie_list_collection}
+        
+        result = Movie.now_playing_by_genre(hit_status: true, with_genres: 1)
+
+        expect(result).to be_a(Array)
+        expect(result.first).to be_a(Movie)
+        expect(result.first).to have_attributes(id: 1)
+        expect(result.first.genre_ids).to contain_exactly(8, 11)
+      end
+    end
   end
 
   describe ".get_movie" do
@@ -82,6 +96,19 @@ RSpec.describe Movie do
       Movie.movie_list_metadata_source = ->(page) {movie_metadata}
 
       result = Movie.movie_list_metadata
+
+      expect(result.page).to eq(1)
+      expect(result.total_pages).to eq(10)
+    end
+  end
+
+  describe ".filtered_movie_list_metadata" do
+
+    it "returns an object containing metadata about list of movies" do
+      filtered_movie_metadata = {page: 1, total_pages: 10}
+      Movie.filtered_movie_list_metadata_source = ->(page) {filtered_movie_metadata}
+
+      result = Movie.filtered_movie_list_metadata(with_genres: 1)
 
       expect(result.page).to eq(1)
       expect(result.total_pages).to eq(10)
@@ -136,12 +163,43 @@ RSpec.describe Movie do
     expect(described_class.new.respond_to?(:hit_movie?)).to eq(true)
   end
 
+  it "responds to #vote_rating?" do
+    expect(described_class.new.respond_to?(:vote_rating?)).to eq(true)
+  end
+
   describe "#vote_rating" do
     
     it "rounds a given vote rating" do
       movie = Movie.new(vote_rating: 7.3)
 
       expect(movie.vote_rating).to eq(7)
+    end
+  end
+
+  describe "#vote_rating?" do
+    
+    context "when there is a vote rating" do  
+      it "returns true" do
+        movie = Movie.new(vote_rating: 1)
+
+        expect(movie.vote_rating?).to eq(true)
+      end
+    end
+
+    context "when there is no vote rating" do  
+      it "returns false" do
+        movie = Movie.new(vote_rating: nil)
+
+        expect(movie.vote_rating?).to eq(false)
+      end
+    end
+
+    context "when a vote rating is zero" do  
+      it "returns false" do
+        movie = Movie.new(vote_rating: 0)
+
+        expect(movie.vote_rating?).to eq(false)
+      end
     end
   end
 
