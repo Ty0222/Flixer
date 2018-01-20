@@ -13,7 +13,7 @@ class MovieDecorator < Decorator
   end
 
   def star_rating(context)
-    return calculate_number_of_stars(context) if vote_rating
+    return calculate_number_of_stars(context) if vote_rating?
     no_vote_rating(context)
   end
 
@@ -31,7 +31,7 @@ class MovieDecorator < Decorator
 
   def background_image(context)
     context.image_tag(background_poster_url, class: "background-poster") +
-     context.content_tag(:div, "", class: "background-poster-cover")
+     context.content_tag(:div, "", class: "background-poster is-cover")
   end
 
   def hit_status(context)
@@ -91,11 +91,6 @@ class MovieDecorator < Decorator
 
     def no_vote_rating(context)
       context.content_tag(:div, "No rating", class: "is-without-rating")
-    end
-
-    def vote_rating
-      return nil if super.round == 0
-      super.round
     end
 
     def poster_url
