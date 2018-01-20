@@ -1,55 +1,7 @@
 <div class="clear"></div>
-<article class="movie">
-<% if @movies.empty? %>	
-	<div class="no-matches">Sorry no matches.</div>
-<%else %>
-	<% @movies.each do |movie| %>
-	<div class="movie-container">
-		<%= link_to image_for(movie), movie %>
-		<div class="index-movie-title">
-			<p>
-				<%= movie.title %>
-			</p>
-		</div>
-		<ul>
-			<li>
-				<strong>Rated:</strong> <%= movie.rating %>
-			</li>
-			<li>
-				<strong>Release Date:</strong> <%= movie.released_on.to_s(:release_date) %> (<%= time_ago_in_words(movie.released_on) %> ago) (USA)
-			</li>
-			<li>
-				<strong>Worldwide Gross:</strong> <%= format_total_gross(movie) %>
-			</li>
-			<li>
-			<strong>Cast:</strong> <%= movie.cast %>
-			</li>
-			<li>
-				<strong>Director:</strong> <%= movie.director %>
-			</li>
-			<li>
-				<strong>Duration:</strong> <%= movie.duration %>
-			</li>
-			<li>
-				<strong>Average Star Rating:</strong>
-				<br />
-				<% review_rating = format_average_stars(movie) %>
-				<% if ratings_exist(review_rating) %>
-					<% review_rating.times do %>
-						<%= image_tag("rating_icon.png", alt: "*", class: "rating-icon") %>
-					<% end %>
-				<% else %>
-					<br />
-					<%= review_rating %>
-				<% end %>	
-			</li>
-			<li>
-				<%= classic(movie) %>
-			</li>
-		</ul>
-		<%= link_to image_tag("more_info_btn.png", class: "more-info-btn"), movie %>
-	</div>
-	<div id="movie-index-spacing"></div>
-	<% end %>
+<% if @movies.empty? %> 
+  <%= render "movies/movie_billboard_no_matches" %>
+<% else %>
+  <%= render "movies/movie_billboard", movies: @movies %>
+  <%= render "movies/movie_page_metadata", movies_metadata: @movies_metadata %>
 <% end %>
-</article>
