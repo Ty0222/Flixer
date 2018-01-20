@@ -1,0 +1,25 @@
+@import "colors", "borders";
+
+.form {
+  position: relative;
+}
+
+.form--default {
+  background: url("secondary_bg.png") no-repeat;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: $secondary-bg-radius-form;
+}
+
+.form--genre {
+  margin-bottom: 221px;
+}
+
+.form--review {
+  margin-bottom: 131px;
+}
+
+.form--session {
+  margin-bottom: 81px;
+}

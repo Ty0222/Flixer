@@ -1,0 +1,48 @@
+@import "colors", "borders";
+
+.layout {
+	position: relative;
+	min-height: 100%;
+}
+
+.layout__main {
+	padding-bottom: 80px;
+	-webkit-transform: translate3d(0,0,0);
+}
+
+.layout__head {
+	z-index: 99;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 50px;
+	color: $primary-text-color;
+	background: $primary-color;
+	border-bottom: 1px solid $secondary-color;
+
+	.navigation {
+		max-width: 1600px;
+		width: 100%;
+		margin: auto;
+		font-family: Arial, Verdana, Sans-serif;
+		font-size: 18px;
+	}
+}
+
+.layout__footer {
+	background: $primary-color;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 80px;
+	
+	p {
+		height: 80px;
+		line-height: 80px;
+		margin: auto;
+		font-family: Arial, Verdana, Sans-serif;
+		font-size: 18px;
+		color: $primary-text-color;
+		text-align: center;
+	}
+}

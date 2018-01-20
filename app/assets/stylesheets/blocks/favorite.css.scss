@@ -1,0 +1,24 @@
+@import "colors", "borders";
+
+favorite {
+  background: $quaternary-color;
+  position: fixed;
+  width: 200px;
+  height: 100px;
+  top: 480px;
+  right: -7px;
+  padding: 30px;
+  border: 1px solid $primary-color;
+  border-right: none;
+  border-radius: $secondary-bg-radius;
+  overflow-y: scroll;
+
+  .favorite__header {
+    margin-bottom: 20px;
+    margin-top: -20px;
+    color: $primary-text-color;
+    font-family: Verdana, Arial, Sans-serif;
+    font-size: 17px;
+    text-align: center;
+  }
+}

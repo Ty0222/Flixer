@@ -1,0 +1,85 @@
+@import "colors", "borders";
+
+.movie-info {}
+
+.movie-info__title {
+  position: absolute;
+  bottom: 0;
+  background: #2a71b2;
+  width: 390px;
+  height: 62.5px;
+  margin-left: -10px;
+  border-radius: 12px;
+
+  p {
+    margin-left: 10px;
+    font-family: Arial, Verdana, Sans-serif;
+    font-size: 20px;
+    text-align: center;
+    color: #FFFFFF;
+  }
+}
+
+.movie-info__other-details {
+  display: block;
+  padding: 0;
+  padding-bottom: 100px;
+  float: right;
+  width: 430px;
+  margin: 15px 0 0 0;
+  list-style-type: none;
+  color: #FFFFFF;
+  font-family: Arial, Verdana, Sans-serif;
+  font-size: 16px;
+
+  li {
+    width: 360px;
+    margin: 0 auto 25px;
+    line-height: 30px;
+  }
+
+  li > span {
+    color: $tertiary-text-color;
+  }
+
+  .is-star-rating {
+    float: none;
+    width: 20px;
+    margin: 5px 0 0 0;
+    border: none;
+    box-shadow: none;
+  }
+
+  .is-without-rating {
+    color: $secondary-text-color;
+  }
+
+  .is-hit-movie {
+    display: inline-block;
+    color: $secondary-text-color;
+    padding: 3px;
+    border: 2px solid $hit-rating-border-color;
+    border-radius: 100px;
+  }
+}
+
+.movie-info.is-overview-only {
+  background-color: rgba(0,0,0,0.8);
+  max-width: 800px;
+  width: 100%;
+  height: 100%;
+  margin: 15px auto 50%;
+  border: 1.5px solid #FFFFFF;
+  border-radius: $secondary-bg-radius;
+}
+
+.movie-info__overview {
+  width: 560px;
+  margin: 0 auto;
+  padding: 53px;
+  color: $primary-text-color;
+  font-family: Arial, Verdana, Sans-serif;
+  font-size: 16px;
+  line-height: 30px;
+  text-align: center;
+}

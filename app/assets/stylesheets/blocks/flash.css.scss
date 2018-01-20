@@ -1,0 +1,15 @@
+@import "colors", "borders";
+
+.flash {
+  margin-bottom: 25px;
+  text-align: center;
+  text-transform: uppercase;
+  
+  &.notice {
+    color: $flash-notice-color;
+  }
+
+  &.alert {
+    color: $flash-alert-color;
+  }
+}

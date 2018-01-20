@@ -1,0 +1,12 @@
+.date-select {
+  max-width: 100px;
+  display: inline;
+  margin-left: 65px;
+
+  #movie_released_on_1i, #movie_released_on_2i,
+  #movie_released_on_3i {
+    max-width: 100px;
+    width: 100%;
+    margin-right: 30px;
+  }
+}

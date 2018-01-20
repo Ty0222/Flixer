@@ -1,0 +1,32 @@
+@import "colors", "borders";
+
+.user-list {
+  position: relative;
+  background: url("secondary_bg.png");
+  max-width: 200px;
+  width: 100%;
+  height: 40px;
+  margin: 10px auto 500px;
+  padding: 0;
+  border-radius: $secondary-bg-radius;
+
+  .user-list__name {
+    position: relative; 
+    display: block;
+    top: 8px;
+    color: $primary-text-color;
+    font-family: Verdana, Arial, Sans-serif;
+    font-size: 18px;
+    list-style-type: none;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .user-list__name:hover {
+    color: $secondary-text-color;
+  }
+}
+
+.user-list--no-users {
+  margin-bottom: 465px;
+}

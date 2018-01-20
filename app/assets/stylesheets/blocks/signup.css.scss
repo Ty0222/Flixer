@@ -1,0 +1,18 @@
+@import "colors", "borders";
+
+.signup {
+  margin: 30px auto 0;
+  padding-bottom: 10px;
+  color: darken($primary-text-color, 60%);
+  font-family: Verdana, Arial, Sans-serif;
+  font-size: 13px;
+  text-align: center;
+
+  .signup__link {
+    color: $tertiary-text-color;
+  }
+
+  .signup__link:hover {
+    color: $secondary-text-color;
+  }
+}

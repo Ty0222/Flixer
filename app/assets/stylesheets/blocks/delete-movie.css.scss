@@ -1,0 +1,23 @@
+@import "colors", "borders";
+
+.delete-movie {
+  background: url("secondary_bg.png") no-repeat;
+  max-width: 200px;
+  width: 100%;
+  margin: 25px auto 0;
+  border-radius: $secondary-bg-radius;
+}
+
+.delete-movie__link {
+  position: relative;
+  width: 100%;
+  left: 65px;
+  font-family: Arial, Verdana, Sans-serif;
+  font-size: 14px;
+   color: darken($primary-text-color, 60%);
+   text-decoration: none;
+}
+
+.delete-movie__link:hover {
+  color: $quaternary-text-color;
+}

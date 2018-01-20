@@ -1,0 +1,32 @@
+@import "colors", "borders";
+
+.movie-page-metadata {
+  position: absolute;
+  bottom: 110px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: Arial, Verdana, Sans-serif;
+  font-size: 18px;
+}
+
+.movie-page-metadata__page-number {
+  color: $primary-text-color;
+  margin-bottom: 30px;
+}
+
+.movie-page-metadata__pagination {}
+
+.movie-page-metadata__page-link {
+  padding: 0 4px;
+  color: $secondary-text-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $tertiary-text-color;
+  }
+}
+
+.movie-page-metadata__page-link.is-current {
+  color: $tertiary-text-color;
+}

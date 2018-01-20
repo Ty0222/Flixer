@@ -1,13 +1,19 @@
-$primary-color: #2A71B2;
-$secondary-color: #FFBF00;
-$tertiary-color: #DDDDDD;
-$quaternary-color: #222222;
-$primary-text-color: #FFF;
-$secondary-text-color: #FFBF00;
-$tertiary-text-color: #2A71B2;
-$quaternary-text-color: #FF0000;
-$errors-text-color: #FF0000;
-$errors-background-color: #FFC;
-$flash-notice-color: #00B22D;
-$flash-alert-color:  #FF0000;
-$text-field-color: #333333;
+$primary-color: #2A71B2; /*blue*/
+$secondary-color: #FFBF00; /*yellow*/
+$tertiary-color: #000000; /*black*/
+$quaternary-color: #222222; /*dark grey*/
+
+$primary-text-color: #FFFFFF; /*white*/
+$secondary-text-color: #FFBF00; /*yellow*/
+$tertiary-text-color: #2A71B2; /*blue*/
+$quaternary-text-color: #FF0000; /*red*/
+$errors-text-color: #FF0000; /*red*/
+
+$hit-rating-border-color: #FF0000;
+
+$errors-background-color: #FFCCCC; /*salmon red*/
+
+$flash-notice-color: #00B22D; /*green*/
+$flash-alert-color:  #FF0000; /*red*/
+
+$text-field-color: #333333; /*dark grey*/

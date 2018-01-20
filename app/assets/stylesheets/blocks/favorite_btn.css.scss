@@ -1,0 +1,32 @@
+@import "colors", "borders";
+
+.favorite-btn {
+
+  .favorite-btn__button {
+    position: absolute;
+    bottom: 70px;
+    left: 130px;
+    
+    a img {
+      border: none;
+      border-radius: 150px;
+    }
+
+    .favorite-btn__text {
+      position: absolute;
+      font-family: Verdana, Arial, Sans-serif;
+      font-size: 13px;
+      color: $secondary-text-color;
+
+      .favorite-btn__text--not-favorite {
+        top: 48%;
+        left: 30%;
+      }
+
+      favorite-btn__text--favorite {
+        top: 48%;
+        left: 37%;
+      }
+    }
+  }
+}

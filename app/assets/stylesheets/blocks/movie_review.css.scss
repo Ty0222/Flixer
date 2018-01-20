@@ -1,0 +1,33 @@
+@import "colors", "borders";
+
+.movie-review {
+  float: right;
+  position: relative;
+  margin-right: 20px;
+  top: 17px;
+  color: $primary-text-color;
+  font-family: Arial, Verdana, Sans-serif;
+  font-size: 14px;
+}
+
+.movie-review__link {
+  color: $primary-text-color;
+  font-family: Arial, Verdana, Sans-serif;
+  font-size: 14px;
+}
+
+.movie-review__link:hover {
+  color: $secondary-color;
+}
+
+.movie-review__genre-link {
+  text-decoration: none;
+}
+
+.movie-review__genre-link:hover {
+  background: $secondary-color;
+
+  p {
+    color: $primary-color;
+  }
+}

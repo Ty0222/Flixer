@@ -1,0 +1,39 @@
+@import "colors", "borders";
+
+.user {
+  max-width: 145px;
+  width: 100%;
+  margin: 16px auto 0;
+  text-align: center;
+
+  .user__image {
+    border: 1px solid #787878;
+  }
+
+  .user__username {
+    position: relative;
+    top: 22px;
+    font-family: Verdana, Arial, Sans-serif;
+    font-size: 20px;
+  }
+
+  .user__link--all {
+    margin-top: 40px;
+    text-align: center;
+    color: darken($primary-text-color, 60%);
+    font-family: Verdana, Arial, Sans-serif;
+
+    .user__link--delete {
+      position: relative;
+      top: 15px;
+    }
+
+    .user__link--delete:hover {
+      color: $quaternary-text-color;
+    }
+
+    .user__link--edit:hover {
+      color: $tertiary-text-color;
+    }
+  }
+}

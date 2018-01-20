@@ -1,0 +1,23 @@
+@import "colors", "borders";
+
+.background-poster {
+  z-index: -99;
+  position: fixed;
+  width: 110%;
+  height: 110%;
+  top: -180px;
+  -webkit-filter: blur(2.5px);
+  filter: blur(2.5px);
+}
+
+.background-poster.is-cover {
+  z-index: -98;
+  position: fixed;
+  background-color: rgba(0,0,0,0.5);
+  width: 110%;
+  height: 110%;
+  top: -180px;
+  right: 0;
+  left: 0;
+  margin: auto;
+}

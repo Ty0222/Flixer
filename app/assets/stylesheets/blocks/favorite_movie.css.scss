@@ -1,0 +1,17 @@
+@import "colors", "borders";
+
+.favorite-movie {
+  margin-top: 25px;
+  text-align: center;
+
+  .favorite-movie__link {
+    color: $tertiary-text-color;
+    font-family: Verdana, Arial, Sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+  }
+
+  .favorite-movie__link:hover {
+    color: $secondary-text-color;
+  }
+}

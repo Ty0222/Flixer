@@ -1,0 +1,10 @@
+@import "colors", "borders";
+
+.movie-fans {
+  position: absolute;
+  bottom: 20px;
+  left: 170px;
+  color: $primary-text-color;
+  font-family: Arial, Verdana, Sans-serif;
+  font-size: 20px;
+}

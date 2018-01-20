@@ -1,0 +1,32 @@
+.flixer-logo {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 43px;
+  height: 43px;
+  border-radius: 25px;
+  -webkit-box-shadow: inset 0px 0px 0px 5px rgba(0,0,0,0.5);
+  -moz-box-shadow: inset 0px 0px 0px 5px rgba(0,0,0,0.5);
+  box-shadow: inset 0px 0px 0px 5px rgba(0,0,0,0.5);
+  transition: 0.7s;
+
+  &:hover {
+    -webkit-box-shadow: inset 0px 0px 0px 5px rgba(255,191,0,1);
+    -moz-box-shadow: inset 0px 0px 0px 5px rgba(255,191,0,1);
+    box-shadow: inset 0px 0px 0px 5px rgba(255,191,0,1);
+    transition: 0.7s;
+  }
+}
+
+.flixer-logo__image {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 18px;
+}

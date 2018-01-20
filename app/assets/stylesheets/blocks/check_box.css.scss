@@ -1,0 +1,18 @@
+@import "colors", "borders";
+
+.check-box-container {
+  box-sizing: border-box;
+  width: 400px;
+  margin: 30px auto 0;
+  padding: 15px;
+  border: 1px solid $secondary-color;
+  border-radius: $secondary-bg-radius-form;
+  text-align: center;
+
+  label {
+    margin-left: 3px;
+    margin-right: 12px;
+    color: $primary-text-color;
+    font-family: Verdana, Arial, Sans-serif;
+  }
+}

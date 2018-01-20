@@ -1,0 +1,17 @@
+@import "colors", "borders";
+
+.review {
+  background: url("review_bg.png") no-repeat;
+  margin: 20px auto 40px;
+  max-width: 500px;
+  width: 100%;
+  border-radius: $secondary-bg-radius;
+}
+
+.review--no-review {
+  height: 310px;
+  margin-top: 50px;
+  font-family: Arial;
+  font-size: 30px;
+  text-align: center;
+}
