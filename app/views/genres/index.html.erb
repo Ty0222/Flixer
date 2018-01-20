@@ -1,18 +1,7 @@
-<div class="clear"></div>
-<header>
-	<div class="title-header">
-		Genres
-	</div>
-</header>
-<article class="genre">
+<div class="genre-list">
 	<% @genres.each do |genre| %>
-	<div class="genre-container">
-		<%= link_to genre.name, genre_movies_path(genre), class: "genre-name" %>
-
-		<% if current_user_admin? %> 
-			<%= link_to "Edit", edit_genre_path(genre), class: "edit-genre" %>
-			<%= link_to "Delete", genre, method: :delete, data: { confirm: "Are you sure?" }, class: "delete-genre" %>
-		<% end %>
-	</div>
+		<div class="genre-list__name">
+			<%= link_to genre.name, filtered_movies_by_genre_url(genre_ids: genre.id) %>
+		</div>
 	<% end %>
-</article>
+</div>
