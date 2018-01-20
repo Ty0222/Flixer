@@ -1,14 +1,16 @@
-<header id="page-header">
-	<div id="header-container">
-		<%= link_to image_tag("flixer_logo.png", class: "flixer-logo"), root_path %> 
-		<div class="navbar-container">
-			<% if current_user %>
-				<%= link_to current_user.username, user_path(current_user.username), class: "navbar-content" %> |
-				<%= link_to "Account Settings", edit_user_path(current_user.username), class: "navbar-content" %> | 
-				<%= link_to "Log Out", session_path, method: :delete, class: "navbar-content" %>
-			<% else %>
-				<%= link_to "Sign Up", signup_path, class: "navbar-content" %> | <%= link_to "Log In", new_session_path, class: "navbar-content" %>
-			<% end %>
+<div class="layout__head">
+	<div class="navigation">
+		<div class="flixer-logo">
+			<%= link_to image_tag("flixer_logo.png", class: "flixer-logo__image"), movies_url(page: 1) %> 
+		</div>
+		<div class="menu-content">
+			<div class="menu-content__listing-title" id="m-c__listing-title">In Theaters</div>
+			<%= link_to "Genres", genres_url, class: "menu-content__genre-title" %>
+			<ul class="menu-content__listing-options">
+				<li><%= link_to "All", movies_url %></li>
+				<li><%= link_to "Hits Only", get_hit_movies_url(movies_metadata) %></li>
+			</ul>
 		</div>
 	</div>
-</header>
+</div>
+<div class="movie-index-spacing-bottom"></div>
