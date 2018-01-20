@@ -7,14 +7,13 @@
 	  <%= csrf_meta_tags %>
 	</head>
 	<body>
-		<%= render "layouts/header" %>
-
-		<%= render "layouts/sidebar" %>
-
-		<%= render "layouts/flashes" %>
-
-		<%= yield %>
-
-		<%= render "layouts/footer" %>
+		<div class="layout">
+			<%= render "layouts/header", movies_metadata: @movies_metadata %>
+			<div class="layout__main">
+				<%= render "layouts/flashes" %>
+				<%= yield %>
+			</div>
+			<%= render "layouts/footer" %>
+		</div>
 	</body>
 </html>
