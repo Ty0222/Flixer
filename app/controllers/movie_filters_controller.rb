@@ -1,5 +1,4 @@
 class MovieFiltersController < ApplicationController
-  skip_before_action :require_login
 
   def index_by_genre
     filtered_movies = Movie.now_playing_by_genre(with_genres: params[:genre_ids], page: params[:page], hit_status: params[:hit_status])
