@@ -19,11 +19,7 @@
 /public/system
 
 #Ignore environment configuration files.
-.env
 config/initializers/dev_env.rb
 
 # Ignore DS_Store files.
 .DS_Store
-
-# Ignore file containing API key
-config/initializers/api_keys.rb
