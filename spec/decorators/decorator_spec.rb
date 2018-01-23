@@ -4,6 +4,12 @@ require_relative "../../app/decorators/decorator"
 RSpec.describe Decorator do
 
   include_examples "decorator interface"
+
+  it "delegates all unknown messages to its underlying class" do
+    decorator = Decorator.decorate(double(foo: "bar"))
+
+    expect(decorator.foo).to eq("bar")
+  end
   
   describe "#to_model" do
     it "returns the underlying object" do

@@ -3,12 +3,6 @@ require "rails_helper"
 RSpec.describe MovieDecorator do
 
   include_examples "decorator interface"
-  
-  it "delegates all unknown messages to its underlying class" do
-    decorator = MovieDecorator.new(double(foo: "bar"))
-
-    expect(decorator.foo).to eq("bar")
-  end
 
   it "responds to #title" do
     expect(described_class.new(double).respond_to?(:title)).to eq(true)  
