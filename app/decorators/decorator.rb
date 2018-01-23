@@ -11,6 +11,7 @@ class Decorator < SimpleDelegator
   end
 
   def self.decorate(object)
+    return nil if object.nil?
     decorate_collection_if_present(object)
   end
 

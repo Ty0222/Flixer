@@ -1,22 +1,30 @@
 require_relative "../../app/decorators/decorator"
 
 RSpec.describe Decorator do
+
+  it "responds to #to_model" do
+    expect(described_class.decorate(double).respond_to?(:to_model)).to eq(true)
+  end
+
+  it "responds to #class" do
+    expect(described_class.decorate(double).respond_to?(:class)).to eq(true)
+  end
   
   describe "#to_model" do
     it "returns the underlying object" do
       object = double
-      decorator = Decorator.new(object)
+      decorated_object = Decorator.decorate(object)
 
-      expect(decorator.to_model).to eq(object)
+      expect(decorated_object.to_model).to eq(object)
     end
   end
 
   describe "#class" do
     it "returns the class of the underlying object" do
       object = double
-      decorator = Decorator.new(object)
+      decorated_object = Decorator.decorate(object)
 
-      expect(decorator.class).to eq(object.class)
+      expect(decorated_object.class).to eq(object.class)
     end
   end
 
@@ -48,6 +56,15 @@ RSpec.describe Decorator do
 
         expect(decorated_object).to be_a(Decorator)
         expect(decorated_object.decorated_object_method).to eq("object1")
+      end
+    end
+
+    context "when its underlying object is nil" do  
+      it "returns nil from NilClass" do
+        decorated_object = Decorator.decorate(nil)
+        
+        expect(decorated_object).to eq(nil)
+        expect(decorated_object).to be_a(NilClass)
       end
     end
   end
