@@ -1,14 +1,9 @@
+require_relative "interfaces/decorator_interface"
 require_relative "../../app/decorators/decorator"
 
 RSpec.describe Decorator do
 
-  it "responds to #to_model" do
-    expect(described_class.decorate(double).respond_to?(:to_model)).to eq(true)
-  end
-
-  it "responds to #class" do
-    expect(described_class.decorate(double).respond_to?(:class)).to eq(true)
-  end
+  include_examples "decorator interface"
   
   describe "#to_model" do
     it "returns the underlying object" do
@@ -26,10 +21,6 @@ RSpec.describe Decorator do
 
       expect(decorated_object.class).to eq(object.class)
     end
-  end
-
-  it "responds to .decorate" do
-    expect(described_class.respond_to?(:decorate)).to eq(true)
   end
 
   describe ".decorate" do
