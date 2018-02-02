@@ -1,7 +1,7 @@
 <div class="layout__head">
 	<div class="navigation">
 		<div class="flixer-logo">
-			<%= link_to image_tag("flixer_logo.png", class: "flixer-logo__image"), get_movies_url(movies_metadata) %> 
+			<%= link_to image_tag("flixer_logo.png", class: "flixer-logo__image"), root_url(page: 1, hit_status: false) %> 
 		</div>
 		<div class="menu-content">
 			<div class="menu-content__listing-title" id="m-c__listing-title">In Theaters</div>
