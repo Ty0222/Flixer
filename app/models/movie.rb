@@ -51,7 +51,7 @@ class Movie
   end
 
   def vote_rating?
-  	vote_rating.nil? || vote_rating == 0 ? false : true
+  	vote_rating.present? && vote_rating != 0 ? true : false
   end
 
 
