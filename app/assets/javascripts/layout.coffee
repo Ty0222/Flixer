@@ -1,4 +1,4 @@
-jQuery(document).on "page:change", ->
+jQuery(document).on "turbolinks:load", ->
   $(".menu-content__listing-title").click ->
     $(".menu-content__listing-options").fadeToggle()
 
