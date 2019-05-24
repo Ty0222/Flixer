@@ -41,9 +41,15 @@ gem "httparty"
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :development do
+  gem "thin"
+end
+
 group :test, :development do
   gem "minitest"
   gem "rspec-rails", "3.5.0"
+  gem "pry"
+  gem "pry-rails"
 end
 
 group :test do
